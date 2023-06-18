@@ -1,0 +1,2 @@
+rootProject.name = "Flash Translator"
+include ':app'

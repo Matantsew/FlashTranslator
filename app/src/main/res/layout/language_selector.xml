@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/from"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/from_language"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:textAlignment="textStart"
+        android:background="@color/light_gray"
+        android:hint="@string/languages"/>
+
+    <Button
+        android:id="@+id/swap"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/swap"
+        android:background="@drawable/ic_baseline_swap_vert_24"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/to"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/to_language"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@color/light_gray"
+        android:textAlignment="textStart"
+        android:hint="@string/languages"/>
+
+</LinearLayout>

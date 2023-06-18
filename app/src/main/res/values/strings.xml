@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Flash Translator</string>
+    <string name="translator">Translator</string>
+    <string name="languages">Languages</string>
+    <string name="settings">Settings</string>
+    <string name="turn_on">Turn on</string>
+    <string name="about">About</string>
+    <string name="from">From</string>
+    <string name="swap">Swap</string>
+    <string name="turn_on_content_description">Translator will be constantly launched</string>
+    <string name="accessibility_service_check_title">Check an accessibility service permissions</string>
+    <string name="accessibility_service_opening">Before start using a translator, please make sure you allowed an accessibility service to use it</string>
+    <string name="to">To</string>
+</resources>
