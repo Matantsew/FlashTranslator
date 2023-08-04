@@ -1,16 +1,16 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.FlashTranslator" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/bright_apricot</item>
-        <item name="colorPrimaryVariant">@color/gray_cyan</item>
+        <item name="colorPrimary">@color/bright_coast</item>
+        <item name="colorPrimaryVariant">@color/gray_sea</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_cyan</item>
-        <item name="colorSecondaryVariant">@color/light_cyan</item>
+        <item name="colorSecondary">@color/light_coast</item>
+        <item name="colorSecondaryVariant">@color/light_coast</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

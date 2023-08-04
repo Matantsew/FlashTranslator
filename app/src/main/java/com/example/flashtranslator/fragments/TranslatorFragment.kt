@@ -55,7 +55,7 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
             languages
         )
 
-        spinnerSourceLanguageArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerSourceLanguageArrayAdapter.setDropDownViewResource(R.layout.spinner_language_dropdown_item)
         spinnerSourceLanguage.adapter = spinnerSourceLanguageArrayAdapter
 
         val spinnerTargetLanguageArrayAdapter: ArrayAdapter<Language> = ArrayAdapter(
@@ -64,7 +64,7 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
             languages
         )
 
-        spinnerTargetLanguageArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerTargetLanguageArrayAdapter.setDropDownViewResource(R.layout.spinner_language_dropdown_item)
         spinnerTargetLanguage.adapter = spinnerTargetLanguageArrayAdapter
 
         viewModel.sourceLanguagePosition.value?.let {

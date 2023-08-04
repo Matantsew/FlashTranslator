@@ -70,7 +70,7 @@ class LanguagesListAdapter(private val viewModel: LanguagesViewModel)
             val number = (position + 1).toString() + "."
 
             languageNum.text = number
-            languageText.text = language.name
+            languageText.text = language.toString()
 
             if(language.isDownloaded == true) {
                 downloadedIcon.visible(true)
@@ -113,7 +113,7 @@ class LanguagesListAdapter(private val viewModel: LanguagesViewModel)
                     downloadDeleteButton.setImageResource(R.drawable.ic_baseline_delete_24)
                     downloadDeleteButton.visible(true)
 
-                    Toast.makeText(itemView.context, "${language.name} language is successfully downloaded", Toast.LENGTH_LONG).show()
+                    Toast.makeText(itemView.context, "$language language is successfully downloaded", Toast.LENGTH_LONG).show()
                 }
                 else {
                     progressCircularDownloadingLanguage.visible(false)

@@ -1,6 +1,7 @@
 package com.example.flashtranslator
 
 import android.accessibilityservice.AccessibilityService
+import android.annotation.SuppressLint
 import android.graphics.PixelFormat
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -20,21 +21,19 @@ import kotlinx.coroutines.runBlocking
 @AndroidEntryPoint
 class TranslateAccessibilityService : AccessibilityService() {
 
-    private var isTranslatedTextViewShown = false
-
-    private lateinit var wm: WindowManager
-    private lateinit var viewBinding: TranslationLayoutBinding
-    private lateinit var ll: FrameLayout
+    private lateinit var windowManager: WindowManager
+    private lateinit var translationLayoutBinding: TranslationLayoutBinding
+    private lateinit var frameLayout: FrameLayout
 
     override fun onCreate() {
         super.onCreate()
 
-        wm = getSystemService(WINDOW_SERVICE) as WindowManager
-        viewBinding = TranslationLayoutBinding.inflate(LayoutInflater.from(this))
-        ll = viewBinding.root
+        windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        translationLayoutBinding = TranslationLayoutBinding.inflate(LayoutInflater.from(this))
+        frameLayout = translationLayoutBinding.root
     }
 
-    private fun createParameters(x: Int, y: Int): WindowManager.LayoutParams{
+    private fun createParameters(x: Int, y: Int): WindowManager.LayoutParams {
 
         val LAYOUT_FLAG: Int = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
 
@@ -55,21 +54,21 @@ class TranslateAccessibilityService : AccessibilityService() {
         return params
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
 
-        if(isTranslatedTextViewShown){
-            wm.removeViewImmediate(ll)
-            isTranslatedTextViewShown = false
+        if(frameLayout.isShown) {
+            windowManager.removeViewImmediate(frameLayout)
         }
 
         runBlocking {
 
-            val languagesStore = obtainLanguageSourceTargetDataStore.data.first()
+            val languagesStore = obtainLanguageSourceTargetDataStore.data.first().asMap()
 
-            if(languagesStore.asMap().isEmpty())return@runBlocking
+            if(languagesStore.isEmpty())return@runBlocking
 
-            val sourceLanguage = languagesStore.asMap()[stringPreferencesKey(SOURCE_LANGUAGE_KEY_PREF_KEY)] as String
-            val targetLanguage = languagesStore.asMap()[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] as String
+            val sourceLanguage = languagesStore[stringPreferencesKey(SOURCE_LANGUAGE_KEY_PREF_KEY)] as String
+            val targetLanguage = languagesStore[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] as String
 
             val translator = LanguagesHelper.getTranslatorClient(sourceLanguage, targetLanguage)
 
@@ -87,12 +86,11 @@ class TranslateAccessibilityService : AccessibilityService() {
             val params = createParameters(xOffset, yOffset)
             translator.translate(selectedText).addOnSuccessListener {
 
-                viewBinding.textTranslation.text = it
-                wm.addView(ll, params)
-                isTranslatedTextViewShown = true
+                translationLayoutBinding.textTranslation.text = it
+                windowManager.addView(frameLayout, params)
             }
 
-            ll.setOnTouchListener(object : View.OnTouchListener {
+            frameLayout.setOnTouchListener(object : View.OnTouchListener {
 
                 var x: Int = 0
                 var y: Int = 0
@@ -103,30 +101,29 @@ class TranslateAccessibilityService : AccessibilityService() {
 
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
 
-                    if (event != null) {
-                        when(event.action){
+                    event?.let {
+                        when(it.action){
                             MotionEvent.ACTION_DOWN -> {
 
                                 x = updatedParams.x
                                 y = updatedParams.y
 
-                                touchedX = event.rawX
-                                touchedY = event.rawY
+                                touchedX = it.rawX
+                                touchedY = it.rawY
 
                             }
                             MotionEvent.ACTION_MOVE -> {
 
-                                updatedParams.x = (x + event.rawX - touchedX) as Int
-                                updatedParams.y = (y + event.rawY - touchedY) as Int
+                                updatedParams.x = (x + it.rawX - touchedX).toInt()
+                                updatedParams.y = (y + it.rawY - touchedY).toInt()
 
-                                wm.updateViewLayout(ll, updatedParams)
+                                windowManager.updateViewLayout(frameLayout, updatedParams)
                             }
                         }
                     }
 
                     return false
                 }
-
             })
         }
     }

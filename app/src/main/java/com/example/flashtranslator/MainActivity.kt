@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
         when(item.itemId){
 
-            R.id.turn_on_translator_menu -> {
+            R.id.turn_on_menu_item -> {
 
                 if(!item.isChecked && !isAccessServiceEnabled(this, TranslateAccessibilityService::class.java)){
 
@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                 item.isChecked = !item.isChecked
             }
 
-            R.id.about_menu -> {
+            R.id.about_menu_item -> {
                 TODO("about menu")
             }
         }
@@ -145,8 +145,8 @@ class MainActivity : AppCompatActivity() {
 
         menuInflater.inflate(R.menu.menu, menu)
 
-        turnOnItem = menu.findItem(R.id.turn_on_translator_menu)
-        aboutItem = menu.findItem(R.id.about_menu)
+        turnOnItem = menu.findItem(R.id.turn_on_menu_item)
+        aboutItem = menu.findItem(R.id.about_menu_item)
 
         return true
     }

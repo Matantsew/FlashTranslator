@@ -3,102 +3,106 @@ package com.example.flashtranslator
 import com.example.flashtranslator.data.data_source.LanguagesHelper
 
 data class Language(var key: String,
-                    var name: String? = null,
                     var isDownloaded: Boolean? = null) {
 
     init {
         prepare()
-        name = convertLanguageKeyToName(key)
     }
 
     private fun prepare() = LanguagesHelper.isLanguageModelDownloaded(key).addOnSuccessListener {
         isDownloaded = it
     }
 
-    private fun convertLanguageKeyToName(key: String): String {
+    override fun toString(): String {
+        return convertLanguageKeyToName(key)
+    }
 
-        return when(key){
-            "af" -> "AFRIKAANS"
-            "sq" -> "ALBANIAN"
-            "ar" -> "ARABIC"
+    private companion object {
+        private fun convertLanguageKeyToName(key: String): String {
 
-            "be" -> "BELARUSIAN"
-            "bg" -> "BULGARIAN"
-            "bn" -> "BENGALI"
+            return when(key){
+                "af" -> "AFRIKAANS"
+                "sq" -> "ALBANIAN"
+                "ar" -> "ARABIC"
 
-            "ca" -> "CATALAN"
-            "zh" -> "CHINESE"
-            "hr" -> "CROATIAN"
-            "cs" -> "CZECH"
+                "be" -> "BELARUSIAN"
+                "bg" -> "BULGARIAN"
+                "bn" -> "BENGALI"
 
-            "da" -> "DANISH"
-            "nl" -> "DUTCH"
+                "ca" -> "CATALAN"
+                "zh" -> "CHINESE"
+                "hr" -> "CROATIAN"
+                "cs" -> "CZECH"
 
-            "en" -> "ENGLISH"
-            "eo" -> "ESPERANTO"
-            "et" -> "ESTONIAN"
+                "da" -> "DANISH"
+                "nl" -> "DUTCH"
 
-            "fi" -> "FINNISH"
-            "fr" -> "FRENCH"
+                "en" -> "ENGLISH"
+                "eo" -> "ESPERANTO"
+                "et" -> "ESTONIAN"
 
-            "gl" -> "GALICIAN"
-            "ka" -> "GEORGIAN"
-            "de" -> "GERMAN"
-            "el" -> "GREEK"
-            "gu" -> "GUJARATI"
+                "fi" -> "FINNISH"
+                "fr" -> "FRENCH"
 
-            "ht" -> "HAITIAN CREOLE"
-            "he" -> "HEBREW"
-            "hi" -> "HINDI"
-            "hu" -> "HUNGARIAN"
+                "gl" -> "GALICIAN"
+                "ka" -> "GEORGIAN"
+                "de" -> "GERMAN"
+                "el" -> "GREEK"
+                "gu" -> "GUJARATI"
 
-            "is" -> "ICELANDIC"
-            "id" -> "INDONESIAN"
-            "ga" -> "IRISH"
-            "it" -> "ITALIAN"
+                "ht" -> "HAITIAN CREOLE"
+                "he" -> "HEBREW"
+                "hi" -> "HINDI"
+                "hu" -> "HUNGARIAN"
 
-            "ja" -> "JAPANESE"
+                "is" -> "ICELANDIC"
+                "id" -> "INDONESIAN"
+                "ga" -> "IRISH"
+                "it" -> "ITALIAN"
 
-            "kn" -> "KANNADA"
-            "ko" -> "KOREAN"
+                "ja" -> "JAPANESE"
 
-            "lt" -> "LITHUANIAN"
-            "lv" -> "LATVIAN"
+                "kn" -> "KANNADA"
+                "ko" -> "KOREAN"
 
-            "mk" -> "MACEDONIAN"
-            "mr" -> "MARATHI"
-            "ms" -> "MALAY"
-            "mt" -> "MALTESE"
+                "lt" -> "LITHUANIAN"
+                "lv" -> "LATVIAN"
 
-            "no" -> "NORWEGIAN"
+                "mk" -> "MACEDONIAN"
+                "mr" -> "MARATHI"
+                "ms" -> "MALAY"
+                "mt" -> "MALTESE"
 
-            "fa" -> "PERSIAN"
-            "pl" -> "POLISH"
-            "pt" -> "PORTUGUESE"
+                "no" -> "NORWEGIAN"
 
-            "ro" -> "ROMANIAN"
-            "ru" -> "RUSSIAN"
+                "fa" -> "PERSIAN"
+                "pl" -> "POLISH"
+                "pt" -> "PORTUGUESE"
 
-            "sk" -> "SLOVAK"
-            "sl" -> "SLOVENIAN"
-            "es" -> "SPANISH"
-            "sv" -> "SWEDISH"
-            "sw" -> "SWAHILI"
+                "ro" -> "ROMANIAN"
+                "ru" -> "RUSSIAN"
 
-            "tl" -> "TAGALOG"
-            "ta" -> "TAMIL"
-            "te" -> "TELUGU"
-            "th" -> "THAI"
-            "tr" -> "TURKISH"
+                "sk" -> "SLOVAK"
+                "sl" -> "SLOVENIAN"
+                "es" -> "SPANISH"
+                "sv" -> "SWEDISH"
+                "sw" -> "SWAHILI"
 
-            "uk" -> "UKRAINIAN"
-            "ur" -> "URDU"
+                "tl" -> "TAGALOG"
+                "ta" -> "TAMIL"
+                "te" -> "TELUGU"
+                "th" -> "THAI"
+                "tr" -> "TURKISH"
 
-            "vi" -> "VIETNAMESE"
+                "uk" -> "UKRAINIAN"
+                "ur" -> "URDU"
 
-            "cy" -> "WELSH"
+                "vi" -> "VIETNAMESE"
 
-            else -> key
+                "cy" -> "WELSH"
+
+                else -> key
+            }
         }
     }
 }

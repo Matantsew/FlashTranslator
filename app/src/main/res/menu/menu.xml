@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/turn_on_translator_menu"
+        android:id="@+id/turn_on_menu_item"
         app:showAsAction="never"
         android:contentDescription="@string/turn_on_content_description"
         android:title="@string/turn_on"/>
 
     <item
-        android:id="@+id/about_menu"
+        android:id="@+id/about_menu_item"
         app:showAsAction="never"
         android:title="@string/about"/>
 
