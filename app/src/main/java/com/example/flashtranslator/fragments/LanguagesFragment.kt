@@ -25,22 +25,10 @@ class LanguagesFragment : Fragment() {
 
     private var languagesAdapter: LanguagesListAdapter? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
-        _binding = FragmentLanguagesBinding.inflate(layoutInflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         languagesAdapter = LanguagesListAdapter(viewModel)
-
-        with(binding.listViewLanguages) {
-            layoutManager = LinearLayoutManager(context)
-            adapter = languagesAdapter
-        }
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenCreated {
             viewModel.availableLanguages.observe(requireActivity()) {
@@ -51,9 +39,15 @@ class LanguagesFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        languagesAdapter = null
-        _binding = null
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        _binding = FragmentLanguagesBinding.inflate(layoutInflater)
+
+        with(binding.listViewLanguages) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = languagesAdapter
+        }
+
+        return binding.root
     }
 }

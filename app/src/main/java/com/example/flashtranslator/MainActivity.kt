@@ -11,8 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.fragment.app.replace
 import com.example.flashtranslator.databinding.ActivityMainBinding
 import com.example.flashtranslator.fragments.LanguagesFragment
 import com.example.flashtranslator.fragments.SettingsFragment
@@ -37,24 +36,24 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        changeFragment(TranslatorFragment())
+        changeFragment<TranslatorFragment>()
 
         binding.bottomNavigation.setOnItemSelectedListener {
 
             when(it.itemId){
 
                 R.id.translator_item -> {
-                    changeFragment(TranslatorFragment())
+                    changeFragment<TranslatorFragment>()
                     true
                 }
 
                 R.id.languages_item -> {
-                    changeFragment(LanguagesFragment())
+                    changeFragment<LanguagesFragment>()
                     true
                 }
 
                 R.id.settings_item -> {
-                    changeFragment(SettingsFragment())
+                    changeFragment<SettingsFragment>()
                     true
                 }
 
@@ -65,10 +64,10 @@ class MainActivity : AppCompatActivity() {
         checkDrawOverlayPermission()
     }
 
-    private fun changeFragment(fragment: Fragment) {
+    private inline fun <reified F : Fragment>changeFragment() {
         supportFragmentManager.commit {
-            replace(binding.container.id, fragment)
             setReorderingAllowed(true)
+            replace<F>(binding.container.id)
         }
     }
 
@@ -84,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(
                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                 Uri.parse("package:$packageName")
-            );
+            )
             /** request permission via start activity for result */
             startActivityForResult(intent, -1010101)
         }

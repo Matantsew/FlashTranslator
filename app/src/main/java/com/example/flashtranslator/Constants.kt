@@ -1,11 +1,13 @@
 package com.example.flashtranslator
 
-const val SOURCE_POSITION = "sourcePosition"
-const val SOURCE_LANGUAGE = "sourceLanguage"
-
-const val TARGET_POSITION = "targetPosition"
-const val TARGET_LANGUAGE = "targetLanguage"
-
 const val CHANNEL_DEFAULT_IMPORTANCE = "CHANNEL_DEFAULT_IMPORTANCE"
-const val DATA_STORE_LANGUAGES = "dataStoreLanguages"
-const val DATA_STORE_LANGUAGE_SOURCE_TARGET = "dataStoreLanguageSourceTarget"
+
+/* Data Store section */
+const val DATA_STORE_SOURCE_TARGET_LANGUAGES = "dataStoreSourceTargetLanguages"
+
+const val SOURCE_LANGUAGE_SPINNER_POSITION_PREF_KEY = "sourcePosition"
+const val TARGET_LANGUAGE_SPINNER_POSITION_PREF_KEY = "targetPosition"
+
+const val SOURCE_LANGUAGE_KEY_PREF_KEY = "sourceTag"
+const val TARGET_LANGUAGE_KEY_PREF_KEY = "targetTag"
+/* --- section end --- */

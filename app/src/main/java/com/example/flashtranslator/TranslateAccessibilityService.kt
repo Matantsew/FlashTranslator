@@ -2,12 +2,17 @@ package com.example.flashtranslator
 
 import android.accessibilityservice.AccessibilityService
 import android.graphics.PixelFormat
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.widget.FrameLayout
-import androidx.datastore.preferences.createDataStore
-import androidx.datastore.preferences.preferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import com.example.flashtranslator.data.data_source.LanguagesHelper
 import com.example.flashtranslator.databinding.TranslationLayoutBinding
+import com.example.flashtranslator.utils.obtainLanguageSourceTargetDataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -59,25 +64,18 @@ class TranslateAccessibilityService : AccessibilityService() {
 
         runBlocking {
 
-            val sourceTargetLanguagesDS = createDataStore(name = DATA_STORE_LANGUAGE_SOURCE_TARGET)
-
-            val languagesStore = sourceTargetLanguagesDS.data.first()
+            val languagesStore = obtainLanguageSourceTargetDataStore.data.first()
 
             if(languagesStore.asMap().isEmpty())return@runBlocking
 
-            val sourceLanguage = languagesStore.asMap().getValue(preferencesKey<Int>(
-                SOURCE_LANGUAGE
-            )) as String
+            val sourceLanguage = languagesStore.asMap()[stringPreferencesKey(SOURCE_LANGUAGE_KEY_PREF_KEY)] as String
+            val targetLanguage = languagesStore.asMap()[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] as String
 
-            val targetLanguage = languagesStore.asMap().getValue(preferencesKey<Int>(
-                TARGET_LANGUAGE
-            )) as String
-
-            //val translator = languagesRepository.getTranslator(sourceLanguage, targetLanguage)
+            val translator = LanguagesHelper.getTranslatorClient(sourceLanguage, targetLanguage)
 
             val source = event.source
 
-            val selectionStart = source.textSelectionStart
+            val selectionStart = source?.textSelectionStart ?: return@runBlocking
             val selectionEnd = source.textSelectionEnd
 
             if(selectionStart >= selectionEnd)return@runBlocking
@@ -87,13 +85,12 @@ class TranslateAccessibilityService : AccessibilityService() {
             val yOffset = event.scrollY
 
             val params = createParameters(xOffset, yOffset)
-/*
             translator.translate(selectedText).addOnSuccessListener {
 
                 viewBinding.textTranslation.text = it
                 wm.addView(ll, params)
-                shown = true
-            }*/
+                isTranslatedTextViewShown = true
+            }
 
             ll.setOnTouchListener(object : View.OnTouchListener {
 

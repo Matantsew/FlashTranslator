@@ -1,16 +1,18 @@
 package com.example.flashtranslator.data.repositories
 
-import android.util.Log
-import androidx.datastore.DataStore
-import androidx.datastore.preferences.Preferences
-import androidx.datastore.preferences.edit
-import androidx.datastore.preferences.preferencesKey
+import android.content.Context
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.flashtranslator.Language
+import com.example.flashtranslator.SOURCE_LANGUAGE_SPINNER_POSITION_PREF_KEY
+import com.example.flashtranslator.SOURCE_LANGUAGE_KEY_PREF_KEY
+import com.example.flashtranslator.TARGET_LANGUAGE_KEY_PREF_KEY
+import com.example.flashtranslator.TARGET_LANGUAGE_SPINNER_POSITION_PREF_KEY
 import com.example.flashtranslator.data.data_source.LanguagesHelper
+import com.example.flashtranslator.utils.obtainLanguageSourceTargetDataStore
 import com.google.mlkit.nl.translate.TranslateLanguage
-import com.google.mlkit.nl.translate.Translation
-import com.google.mlkit.nl.translate.Translator
-import com.google.mlkit.nl.translate.TranslatorOptions
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,33 +20,7 @@ import javax.inject.Singleton
 @Singleton
 class LanguagesRepository @Inject constructor() {
 
-    suspend fun saveSourceTargetLanguages(positionsSourceTargetDS: DataStore<Preferences>,
-                                          key: String,
-                                          position: Int) {
-
-        val dataStoreKey = preferencesKey<Int>(key)
-
-        positionsSourceTargetDS.edit { positions ->
-            positions[dataStoreKey] = position
-        }
-
-        Log.i("SAVED_POSITION", position.toString())
-    }
-
-    suspend fun saveSourceTargetLanguages(positionsSourceTargetDS: DataStore<Preferences>,
-                                          key: String,
-                                          language: String) {
-
-            val dataStoreKey = preferencesKey<String>(key)
-
-            positionsSourceTargetDS.edit { positions ->
-                positions[dataStoreKey] = language
-            }
-
-        Log.i("SAVED_LANGUAGE", language)
-    }
-
-    suspend fun getAvailableLanguages() = flow {
+     fun getAvailableLanguages() = flow {
 
         val languageKeys = TranslateLanguage.getAllLanguages()
 
@@ -53,20 +29,62 @@ class LanguagesRepository @Inject constructor() {
         }
     }
 
+    fun getDownloadedLanguages(readBlock: (languagesList: List<Language>) -> Unit) {
+
+        val downloadedLanguagesModels = LanguagesHelper.getDownloadedLanguagesModels()
+
+        downloadedLanguagesModels.addOnSuccessListener { languages ->
+            val languagesList = languages.map { model ->
+                Language(model.language)
+            }
+            readBlock(languagesList)
+        }
+    }
+
     fun downloadLanguageModel(languageTag: String) = LanguagesHelper.obtainRemotelyLanguageModel(languageTag)
 
-    fun getTranslatorClient(sourceLanguage: String, targetLanguage: String): Translator {
+    suspend fun getSourceLanguagePosition(context: Context) =
+        context
+            .obtainLanguageSourceTargetDataStore
+            .data
+            .first()[intPreferencesKey(SOURCE_LANGUAGE_SPINNER_POSITION_PREF_KEY)]
 
-        val options = TranslatorOptions.Builder()
-            .setSourceLanguage(sourceLanguage)
-            .setTargetLanguage(targetLanguage)
-            .build()
+    suspend fun getTargetLanguagePosition(context: Context) =
+        context
+            .obtainLanguageSourceTargetDataStore
+            .data
+            .first()[intPreferencesKey(TARGET_LANGUAGE_SPINNER_POSITION_PREF_KEY)]
 
-        Translation.getClient(options).downloadModelIfNeeded()
-            .addOnSuccessListener {
-                Log.i("TRANSLATOR", "Downloaded!")
+    suspend fun setSourceLanguagePosition(context: Context, position: Int) {
+        context
+            .obtainLanguageSourceTargetDataStore
+            .edit { preferences ->
+                preferences[intPreferencesKey(SOURCE_LANGUAGE_SPINNER_POSITION_PREF_KEY)] = position
             }
+    }
 
-        return Translation.getClient(options)
+    suspend fun setSourceLanguageKey(context: Context, key: String) {
+        context
+            .obtainLanguageSourceTargetDataStore
+            .edit { preferences ->
+                preferences[stringPreferencesKey(SOURCE_LANGUAGE_KEY_PREF_KEY)] = key
+            }
+    }
+
+    suspend fun setTargetLanguagePosition(context: Context, position: Int) {
+        context
+            .obtainLanguageSourceTargetDataStore
+            .edit { preferences ->
+                preferences[intPreferencesKey(TARGET_LANGUAGE_SPINNER_POSITION_PREF_KEY)] = position
+            }
+    }
+
+    suspend fun setTargetLanguageKey(context: Context, key: String) {
+
+        context
+            .obtainLanguageSourceTargetDataStore
+            .edit { preferences ->
+                preferences[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] = key
+            }
     }
 }

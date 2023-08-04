@@ -106,7 +106,7 @@ class LanguagesListAdapter(private val viewModel: LanguagesViewModel)
         }
 
         private fun onObservableDownloadLanguage(language: Language) {
-            viewModel.obtainLanguageModelRemotely(language.key) { onComplete ->
+            viewModel.obtainOrWaitLanguageModelRemotely(language.key) { onComplete ->
                 if(onComplete) {
                     progressCircularDownloadingLanguage.visible(false)
                     downloadedIcon.visible(true)
@@ -124,9 +124,4 @@ class LanguagesListAdapter(private val viewModel: LanguagesViewModel)
             }
         }
     }
-}
-
-sealed class LanguageDownloadItemUIState {
-    class Downloaded()
-    class DownloadInProgress()
 }

@@ -11,7 +11,7 @@ data class Language(var key: String,
         name = convertLanguageKeyToName(key)
     }
 
-    private fun prepare() = LanguagesHelper.isLanguageDownloaded(key).addOnSuccessListener {
+    private fun prepare() = LanguagesHelper.isLanguageModelDownloaded(key).addOnSuccessListener {
         isDownloaded = it
     }
 
