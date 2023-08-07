@@ -2,13 +2,10 @@ package com.example.flashtranslator.data.repositories
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.flashtranslator.Language
-import com.example.flashtranslator.SOURCE_LANGUAGE_SPINNER_POSITION_PREF_KEY
 import com.example.flashtranslator.SOURCE_LANGUAGE_KEY_PREF_KEY
 import com.example.flashtranslator.TARGET_LANGUAGE_KEY_PREF_KEY
-import com.example.flashtranslator.TARGET_LANGUAGE_SPINNER_POSITION_PREF_KEY
 import com.example.flashtranslator.data.data_source.LanguagesHelper
 import com.example.flashtranslator.utils.obtainLanguageSourceTargetDataStore
 import com.google.mlkit.nl.translate.TranslateLanguage
@@ -43,26 +40,6 @@ class LanguagesRepository @Inject constructor() {
 
     fun downloadLanguageModel(languageTag: String) = LanguagesHelper.obtainRemotelyLanguageModel(languageTag)
 
-    suspend fun getSourceLanguagePosition(context: Context) =
-        context
-            .obtainLanguageSourceTargetDataStore
-            .data
-            .first()[intPreferencesKey(SOURCE_LANGUAGE_SPINNER_POSITION_PREF_KEY)]
-
-    suspend fun getTargetLanguagePosition(context: Context) =
-        context
-            .obtainLanguageSourceTargetDataStore
-            .data
-            .first()[intPreferencesKey(TARGET_LANGUAGE_SPINNER_POSITION_PREF_KEY)]
-
-    suspend fun setSourceLanguagePosition(context: Context, position: Int) {
-        context
-            .obtainLanguageSourceTargetDataStore
-            .edit { preferences ->
-                preferences[intPreferencesKey(SOURCE_LANGUAGE_SPINNER_POSITION_PREF_KEY)] = position
-            }
-    }
-
     suspend fun setSourceLanguageKey(context: Context, key: String) {
         context
             .obtainLanguageSourceTargetDataStore
@@ -71,20 +48,26 @@ class LanguagesRepository @Inject constructor() {
             }
     }
 
-    suspend fun setTargetLanguagePosition(context: Context, position: Int) {
-        context
-            .obtainLanguageSourceTargetDataStore
-            .edit { preferences ->
-                preferences[intPreferencesKey(TARGET_LANGUAGE_SPINNER_POSITION_PREF_KEY)] = position
-            }
-    }
-
     suspend fun setTargetLanguageKey(context: Context, key: String) {
-
         context
             .obtainLanguageSourceTargetDataStore
             .edit { preferences ->
                 preferences[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] = key
             }
     }
+
+    suspend fun getSourceLanguageKey(context: Context) =
+        context
+            .obtainLanguageSourceTargetDataStore
+            .data
+            .first()
+            .asMap()[stringPreferencesKey(SOURCE_LANGUAGE_KEY_PREF_KEY)] as String?
+
+    suspend fun getTargetLanguageKey(context: Context) =
+        context
+            .obtainLanguageSourceTargetDataStore
+            .data
+            .first()
+            .asMap()[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] as String?
+
 }

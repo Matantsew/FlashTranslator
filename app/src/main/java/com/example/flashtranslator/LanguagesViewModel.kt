@@ -29,11 +29,11 @@ class LanguagesViewModel @Inject internal constructor(@ApplicationContext contex
     private var _downloadingLanguagesKeysSet = MutableStateFlow<HashSet<String>>(hashSetOf())
     val downloadingLanguagesKeysSet: StateFlow<HashSet<String>> = _downloadingLanguagesKeysSet
 
-    private var _sourceLanguagePosition = MutableLiveData<Int?>()
-    val sourceLanguagePosition: LiveData<Int?> get() = _sourceLanguagePosition
+    private var _sourceLanguageKey = MutableLiveData<String?>()
+    val sourceLanguageKey: LiveData<String?> get() = _sourceLanguageKey
 
-    private var _targetLanguagePosition = MutableLiveData<Int?>()
-    val targetLanguagePosition: LiveData<Int?> get() = _targetLanguagePosition
+    private var _targetLanguageKey = MutableLiveData<String?>()
+    val targetLanguageKey: LiveData<String?> get() = _targetLanguageKey
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -51,13 +51,13 @@ class LanguagesViewModel @Inject internal constructor(@ApplicationContext contex
 
         viewModelScope.launch(Dispatchers.Main) {
 
-            val sourcePosition = languagesRepository.getSourceLanguagePosition(context)
-            _sourceLanguagePosition.postValue(sourcePosition)
+            val sourcePosition = languagesRepository.getSourceLanguageKey(context)
+            _sourceLanguageKey.postValue(sourcePosition)
         }
 
         viewModelScope.launch(Dispatchers.Main) {
-            val targetPosition = languagesRepository.getTargetLanguagePosition(context)
-            _targetLanguagePosition.postValue(targetPosition)
+            val targetPosition = languagesRepository.getTargetLanguageKey(context)
+            _targetLanguageKey.postValue(targetPosition)
         }
     }
 
@@ -79,19 +79,17 @@ class LanguagesViewModel @Inject internal constructor(@ApplicationContext contex
         }
     }
 
-    fun saveSourceLanguage(context: Context, key: String, position: Int) {
+    fun saveSourceLanguage(context: Context, key: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            languagesRepository.setSourceLanguagePosition(context, position)
             languagesRepository.setSourceLanguageKey(context, key)
-            _sourceLanguagePosition.postValue(position)
+            _sourceLanguageKey.postValue(key)
         }
     }
 
-    fun saveTargetLanguage(context: Context, key: String, position: Int) {
+    fun saveTargetLanguage(context: Context, key: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            languagesRepository.setTargetLanguagePosition(context, position)
             languagesRepository.setTargetLanguageKey(context, key)
-            _targetLanguagePosition.postValue(position)
+            _targetLanguageKey.postValue(key)
         }
     }
 }

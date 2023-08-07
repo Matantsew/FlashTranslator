@@ -63,19 +63,28 @@ class TranslateAccessibilityService : AccessibilityService() {
 
         runBlocking {
 
-            val languagesStore = obtainLanguageSourceTargetDataStore.data.first().asMap()
-
-            if(languagesStore.isEmpty())return@runBlocking
-
-            val sourceLanguage = languagesStore[stringPreferencesKey(SOURCE_LANGUAGE_KEY_PREF_KEY)] as String
-            val targetLanguage = languagesStore[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] as String
-
-            val translator = LanguagesHelper.getTranslatorClient(sourceLanguage, targetLanguage)
-
             val source = event.source
 
             val selectionStart = source?.textSelectionStart ?: return@runBlocking
             val selectionEnd = source.textSelectionEnd
+
+            if(!source.isFocused)return@runBlocking
+
+            val sourceLanguage = // TODO: Consider anther option to obtain sourceLanguage
+                this@TranslateAccessibilityService
+                    .obtainLanguageSourceTargetDataStore
+                    .data
+                    .first()
+                    .asMap()[stringPreferencesKey(SOURCE_LANGUAGE_KEY_PREF_KEY)] as String? ?: return@runBlocking
+
+            val targetLanguage = // TODO: Consider anther option to obtain targetLanguage
+                this@TranslateAccessibilityService
+                    .obtainLanguageSourceTargetDataStore
+                    .data
+                    .first()
+                    .asMap()[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] as String? ?: return@runBlocking
+
+            val translator = LanguagesHelper.getTranslatorClient(sourceLanguage, targetLanguage)
 
             if(selectionStart >= selectionEnd)return@runBlocking
 

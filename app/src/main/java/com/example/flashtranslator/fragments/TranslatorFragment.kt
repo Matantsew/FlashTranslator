@@ -37,6 +37,9 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
         lifecycleScope.launch(Dispatchers.Main) {
 
             viewModel.downloadedLanguages.observe(viewLifecycleOwner) { languagesList ->
+                languagesList.sortedBy { language ->
+                    language.key
+                }
                 initAdapters(languagesList)
             }
         }
@@ -47,12 +50,12 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return binding.root
     }
 
-    private fun initAdapters(languages: List<Language>) {
+    private fun initAdapters(languagesKeys: List<Language>) {
 
         val spinnerSourceLanguageArrayAdapter: ArrayAdapter<Language> = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            languages
+            languagesKeys
         )
 
         spinnerSourceLanguageArrayAdapter.setDropDownViewResource(R.layout.spinner_language_dropdown_item)
@@ -61,18 +64,20 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val spinnerTargetLanguageArrayAdapter: ArrayAdapter<Language> = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            languages
+            languagesKeys
         )
 
         spinnerTargetLanguageArrayAdapter.setDropDownViewResource(R.layout.spinner_language_dropdown_item)
         spinnerTargetLanguage.adapter = spinnerTargetLanguageArrayAdapter
 
-        viewModel.sourceLanguagePosition.value?.let {
-            spinnerSourceLanguage.setSelection(it)
+        viewModel.sourceLanguageKey.value?.let { key ->
+            val selectedLanguageIndex = languagesKeys.indexOfFirst { it.key == key}
+            spinnerSourceLanguage.setSelection(selectedLanguageIndex)
         }
 
-        viewModel.targetLanguagePosition.value?.let {
-            spinnerTargetLanguage.setSelection(it)
+        viewModel.targetLanguageKey.value?.let { key ->
+            val selectedLanguageIndex = languagesKeys.indexOfFirst { it.key == key}
+            spinnerTargetLanguage.setSelection(selectedLanguageIndex)
         }
     }
 
@@ -83,15 +88,17 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         when(parent.id) {
             spinnerSourceLanguage.id -> {
-                if(viewModel.sourceLanguagePosition.value != position) {
-                    val languageKey = (parent.getItemAtPosition(position) as Language).key
-                    viewModel.saveSourceLanguage(requireContext(), languageKey, position)
+                val language = viewModel.downloadedLanguages.value?.get(position)
+                if(viewModel.sourceLanguageKey.value != language?.key) {
+                    val languageKey = (parent.getItemAtPosition(position)) as Language
+                    viewModel.saveSourceLanguage(requireContext(), languageKey.key)
                 }
             }
             spinnerTargetLanguage.id -> {
-                if(viewModel.targetLanguagePosition.value != position) {
-                    val languageKey = (parent.getItemAtPosition(position) as Language).key
-                    viewModel.saveTargetLanguage(requireContext(), languageKey, position)
+                val language = viewModel.downloadedLanguages.value?.get(position)
+                if(viewModel.targetLanguageKey.value != language?.key) {
+                    val languageKey = (parent.getItemAtPosition(position)) as Language
+                    viewModel.saveTargetLanguage(requireContext(), languageKey.key)
                 }
             }
         }
