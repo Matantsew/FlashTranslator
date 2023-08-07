@@ -9,6 +9,7 @@
     <string name="swap">Swap</string>
     <string name="turn_on_content_description">Translator will be constantly launched</string>
     <string name="accessibility_service_check_title">Check an accessibility service permissions</string>
+    <string name="turn_on_hint">To turn on the translator, \ngive accessibility service</string>
     <string name="accessibility_service_opening">Before start using a translator, please make sure you allowed an accessibility service to use it</string>
     <string name="to">To</string>
 </resources>

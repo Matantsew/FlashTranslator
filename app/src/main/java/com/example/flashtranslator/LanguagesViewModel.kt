@@ -47,11 +47,7 @@ class LanguagesViewModel @Inject internal constructor(@ApplicationContext contex
             }
         }
 
-        viewModelScope.launch(Dispatchers.Main) {
-            languagesRepository.getDownloadedLanguages { languagesList ->
-                _downloadedLanguages.value = languagesList
-            }
-        }
+        obtainDownloadedLanguages()
 
         viewModelScope.launch(Dispatchers.Main) {
 
@@ -62,6 +58,14 @@ class LanguagesViewModel @Inject internal constructor(@ApplicationContext contex
         viewModelScope.launch(Dispatchers.Main) {
             val targetPosition = languagesRepository.getTargetLanguagePosition(context)
             _targetLanguagePosition.postValue(targetPosition)
+        }
+    }
+
+    fun obtainDownloadedLanguages() {
+        viewModelScope.launch(Dispatchers.Main) {
+            languagesRepository.getDownloadedLanguages { languagesList ->
+                _downloadedLanguages.value = languagesList
+            }
         }
     }
 

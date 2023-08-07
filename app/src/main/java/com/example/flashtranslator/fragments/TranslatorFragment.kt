@@ -31,8 +31,8 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         _binding = FragmentTranslatorBinding.inflate(layoutInflater)
 
-        spinnerSourceLanguage = binding.languageSelectorInclude.fromLanguage
-        spinnerTargetLanguage = binding.languageSelectorInclude.toLanguage
+        spinnerSourceLanguage = binding.fromLanguage
+        spinnerTargetLanguage = binding.toLanguage
 
         lifecycleScope.launch(Dispatchers.Main) {
 
