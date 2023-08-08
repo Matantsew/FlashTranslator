@@ -1,13 +1,13 @@
-package com.example.flashtranslator.data.repositories
+package com.example.latranslator.data.repositories
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.example.flashtranslator.Language
-import com.example.flashtranslator.SOURCE_LANGUAGE_KEY_PREF_KEY
-import com.example.flashtranslator.TARGET_LANGUAGE_KEY_PREF_KEY
-import com.example.flashtranslator.data.data_source.LanguagesHelper
-import com.example.flashtranslator.utils.obtainLanguageSourceTargetDataStore
+import com.example.latranslator.Language
+import com.example.latranslator.SOURCE_LANGUAGE_KEY_PREF_KEY
+import com.example.latranslator.TARGET_LANGUAGE_KEY_PREF_KEY
+import com.example.latranslator.data.data_source.LanguagesHelper
+import com.example.latranslator.utils.obtainLanguageSourceTargetDataStore
 import com.google.mlkit.nl.translate.TranslateLanguage
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow

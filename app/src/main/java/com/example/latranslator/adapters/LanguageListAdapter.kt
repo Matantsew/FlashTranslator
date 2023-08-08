@@ -1,4 +1,4 @@
-package com.example.flashtranslator.adapters
+package com.example.latranslator.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
-import com.example.flashtranslator.Language
-import com.example.flashtranslator.GeneralViewModel
-import com.example.flashtranslator.R
-import com.example.flashtranslator.utils.visible
+import com.example.latranslator.Language
+import com.example.latranslator.GeneralViewModel
+import com.example.latranslator.R
+import com.example.latranslator.utils.visible
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.example.flashtranslator
+package com.example.latranslator
 
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
@@ -11,9 +11,9 @@ import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.widget.FrameLayout
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.example.flashtranslator.data.data_source.LanguagesHelper
-import com.example.flashtranslator.databinding.TranslationLayoutBinding
-import com.example.flashtranslator.utils.obtainLanguageSourceTargetDataStore
+import com.example.latranslator.data.data_source.LanguagesHelper
+import com.example.latranslator.databinding.TranslationLayoutBinding
+import com.example.latranslator.utils.obtainLanguageSourceTargetDataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking

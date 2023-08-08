@@ -1,4 +1,4 @@
-package com.example.flashtranslator.utils
+package com.example.latranslator.utils
 
 import android.content.Context
 import android.provider.Settings

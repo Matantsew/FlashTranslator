@@ -1,4 +1,4 @@
-package com.example.flashtranslator.fragments
+package com.example.latranslator.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.flashtranslator.*
-import com.example.flashtranslator.adapters.LanguagesListAdapter
-import com.example.flashtranslator.databinding.FragmentLanguagesBinding
+import com.example.latranslator.*
+import com.example.latranslator.adapters.LanguagesListAdapter
+import com.example.latranslator.databinding.FragmentLanguagesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

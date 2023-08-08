@@ -1,4 +1,4 @@
-package com.example.flashtranslator
+package com.example.latranslator
 
 const val CHANNEL_DEFAULT_IMPORTANCE = "CHANNEL_DEFAULT_IMPORTANCE"
 

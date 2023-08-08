@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.FlashTranslator" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.LaTranslator" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/deep_gray_blue</item>
         <item name="colorPrimaryVariant">@color/gray_sea</item>

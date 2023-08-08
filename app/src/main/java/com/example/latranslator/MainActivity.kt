@@ -1,4 +1,4 @@
-package com.example.flashtranslator
+package com.example.latranslator
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.example.flashtranslator.databinding.ActivityMainBinding
-import com.example.flashtranslator.fragments.LanguagesFragment
-import com.example.flashtranslator.fragments.SettingsFragment
-import com.example.flashtranslator.fragments.TranslatorFragment
+import com.example.latranslator.databinding.ActivityMainBinding
+import com.example.latranslator.fragments.LanguagesFragment
+import com.example.latranslator.fragments.SettingsFragment
+import com.example.latranslator.fragments.TranslatorFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

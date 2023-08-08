@@ -1,4 +1,4 @@
-package com.example.flashtranslator
+package com.example.latranslator
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.flashtranslator.data.repositories.LanguagesRepository
-import com.example.flashtranslator.utils.isAccessibilityTurnedOn
+import com.example.latranslator.data.repositories.LanguagesRepository
+import com.example.latranslator.utils.isAccessibilityTurnedOn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers

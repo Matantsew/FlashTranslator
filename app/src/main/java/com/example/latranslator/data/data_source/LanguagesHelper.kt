@@ -1,4 +1,4 @@
-package com.example.flashtranslator.data.data_source
+package com.example.latranslator.data.data_source
 
 import android.util.Log
 import com.google.android.gms.tasks.Task

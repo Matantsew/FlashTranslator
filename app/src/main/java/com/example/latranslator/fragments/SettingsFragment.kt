@@ -1,4 +1,4 @@
-package com.example.flashtranslator.fragments
+package com.example.latranslator.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

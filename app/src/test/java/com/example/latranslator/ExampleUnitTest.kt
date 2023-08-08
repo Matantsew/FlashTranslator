@@ -1,4 +1,4 @@
-package com.example.flashtranslator
+package com.example.latranslator
 
 import org.junit.Test
 

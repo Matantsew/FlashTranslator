@@ -1,7 +1,7 @@
-package com.example.flashtranslator
+package com.example.latranslator
 
-import com.example.flashtranslator.data.data_source.LanguagesHelper
-import com.example.flashtranslator.utils.convertLanguageKeyToName
+import com.example.latranslator.data.data_source.LanguagesHelper
+import com.example.latranslator.utils.convertLanguageKeyToName
 
 data class Language(var key: String,
                     var isDownloaded: Boolean? = null) {
