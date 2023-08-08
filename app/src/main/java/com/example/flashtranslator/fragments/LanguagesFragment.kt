@@ -21,7 +21,7 @@ class LanguagesFragment : Fragment() {
     private var _binding: FragmentLanguagesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: LanguagesViewModel by activityViewModels()
+    private val viewModel: GeneralViewModel by activityViewModels()
 
     private var languagesAdapter: LanguagesListAdapter? = null
 

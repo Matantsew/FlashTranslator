@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/language_selectir"
         android:orientation="vertical"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -27,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <Spinner
-            android:id="@+id/from_language"
+            android:id="@+id/from_language_spinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="18sp"
@@ -51,7 +52,7 @@
             android:contentDescription="@string/swap"
             android:padding="15dp"
             android:src="@drawable/ic_baseline_swap_vert_24"
-            app:layout_constraintTop_toBottomOf="@+id/from_language"
+            app:layout_constraintTop_toBottomOf="@+id/from_language_spinner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tv_to"/>
@@ -68,10 +69,10 @@
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/tv_to"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/to_language"/>
+            app:layout_constraintBottom_toTopOf="@id/to_language_spinner"/>
 
         <Spinner
-            android:id="@+id/to_language"
+            android:id="@+id/to_language_spinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="18sp"
@@ -86,12 +87,29 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/turn_on_hint_text_size"
-        android:gravity="center"
-        android:text="@string/turn_on_hint"/>
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/turn_on_hint_text_size"
+            android:gravity="center"
+            android:text="@string/turn_on_hint"/>
+
+        <Button
+            android:id="@+id/open_accessibility_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray"
+            android:layout_marginTop="5dp"
+            android:text="@string/turn_on"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
 
 </LinearLayout>

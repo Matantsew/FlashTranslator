@@ -16,7 +16,6 @@ import com.example.flashtranslator.databinding.ActivityMainBinding
 import com.example.flashtranslator.fragments.LanguagesFragment
 import com.example.flashtranslator.fragments.SettingsFragment
 import com.example.flashtranslator.fragments.TranslatorFragment
-import com.example.flashtranslator.utils.isAccessServiceEnabled
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var turnOnItem: MenuItem
     private lateinit var aboutItem: MenuItem
 
-    private val viewModel: LanguagesViewModel by viewModels()
+    private val viewModel: GeneralViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,41 +99,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showAccessibilityAlertDialog(){
+    override fun onResume() {
+        super.onResume()
 
-        AlertDialog.Builder(this)
-            .setTitle(R.string.accessibility_service_check_title)
-            .setMessage(
-                R.string.accessibility_service_opening
-            )
-            .setNegativeButton("Cancel", null)
-            .setPositiveButton("Ok"
-            ) { dialog, which -> openAccessibilitySettings() }
-            .show()
-    }
-
-    private fun openAccessibilitySettings(){
-        val accessibilitySettingsIntent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-        startActivity(accessibilitySettingsIntent)
+        viewModel.checkAccessibilityTurnedOn(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId){
+        when(item.itemId) {
 
-            R.id.turn_on_menu_item -> {
-
-                if(!item.isChecked && !isAccessServiceEnabled(this, TranslateAccessibilityService::class.java)){
-
-                    showAccessibilityAlertDialog()
-                    return true
+            R.id.open_accessibility_item -> {
+                if(!viewModel.accessibilityTurnedOn.value) {
+                    viewModel.showAccessibilityAlertDialog(this)
                 }
-
-                item.isChecked = !item.isChecked
+                else viewModel.openAccessibilitySettings(this)
             }
 
             R.id.about_menu_item -> {
-                TODO("about menu")
+                AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ic_logo)
+                    .setTitle(R.string.app_name)
+                    .setMessage(R.string.about_info)
+                    .setNeutralButton(R.string.ok, null)
+                    .show()
             }
         }
 
@@ -145,7 +133,7 @@ class MainActivity : AppCompatActivity() {
 
         menuInflater.inflate(R.menu.menu, menu)
 
-        turnOnItem = menu.findItem(R.id.turn_on_menu_item)
+        turnOnItem = menu.findItem(R.id.open_accessibility_item)
         aboutItem = menu.findItem(R.id.about_menu_item)
 
         return true

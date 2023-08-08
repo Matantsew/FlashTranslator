@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flashtranslator.Language
-import com.example.flashtranslator.LanguagesViewModel
+import com.example.flashtranslator.GeneralViewModel
 import com.example.flashtranslator.R
 import com.example.flashtranslator.utils.visible
 import com.google.android.material.imageview.ShapeableImageView
@@ -18,7 +18,7 @@ import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LanguagesListAdapter(private val viewModel: LanguagesViewModel)
+class LanguagesListAdapter(private val viewModel: GeneralViewModel)
     : RecyclerView.Adapter<LanguagesListAdapter.ViewHolder>() {
 
     private var languages: List<Language>? = null
@@ -102,6 +102,13 @@ class LanguagesListAdapter(private val viewModel: LanguagesViewModel)
 
                     onObservableDownloadLanguage(language)
                 }
+                else {
+
+                    progressCircularDownloadingLanguage.visible(true)
+                    downloadDeleteButton.visible(false)
+
+                    onObservableDeleteLanguageModel(language)
+                }
             }
         }
 
@@ -121,6 +128,21 @@ class LanguagesListAdapter(private val viewModel: LanguagesViewModel)
                     downloadDeleteButton.visible(true)
 
                     Toast.makeText(itemView.context, "Downloading failed", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        private fun onObservableDeleteLanguageModel(language: Language) {
+
+            viewModel.deleteLanguageModel(language.key) { onComplete ->
+                if(onComplete) {
+                    progressCircularDownloadingLanguage.visible(false)
+                    downloadedIcon.visible(false)
+                    downloadDeleteButton.setImageResource(R.drawable.ic_baseline_download_24)
+                    downloadDeleteButton.visible(true)
+
+                    viewModel.obtainDownloadedLanguages()
+                    Toast.makeText(itemView.context, "$language language is successfully deleted", Toast.LENGTH_LONG).show()
                 }
             }
         }

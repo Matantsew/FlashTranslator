@@ -3,7 +3,7 @@ package com.example.flashtranslator.utils
 import android.content.Context
 import android.provider.Settings
 
-fun isAccessServiceEnabled(context: Context, accessibilityServiceClass: Class<*>): Boolean {
+fun isAccessibilityTurnedOn(context: Context, accessibilityServiceClass: Class<*>): Boolean {
 
     val prefString = Settings.Secure.getString(
         context.contentResolver,

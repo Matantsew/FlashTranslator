@@ -15,9 +15,8 @@ val Context.obtainLanguageSourceTargetDataStore: DataStore<Preferences> by prefe
     name = DATA_STORE_SOURCE_TARGET_LANGUAGES
 )
 
-fun String.convertLanguageKeyToName(): String {
-
-    return when(this){
+fun String.convertLanguageKeyToName() =
+    when(this) {
         "af" -> "AFRIKAANS"
         "sq" -> "ALBANIAN"
         "ar" -> "ARABIC"
@@ -100,4 +99,3 @@ fun String.convertLanguageKeyToName(): String {
 
         else -> this
     }
-}

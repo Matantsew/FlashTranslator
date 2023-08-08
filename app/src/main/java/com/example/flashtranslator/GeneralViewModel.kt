@@ -1,11 +1,15 @@
 package com.example.flashtranslator
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.provider.Settings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.flashtranslator.data.repositories.LanguagesRepository
+import com.example.flashtranslator.utils.isAccessibilityTurnedOn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +20,12 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class LanguagesViewModel @Inject internal constructor(@ApplicationContext context: Context,
-                                                      private val languagesRepository: LanguagesRepository)
+class GeneralViewModel @Inject internal constructor(@ApplicationContext context: Context,
+                                                    private val languagesRepository: LanguagesRepository)
     : ViewModel() {
+
+    private var _accessibilityTurnedOn = MutableStateFlow(false)
+    val accessibilityTurnedOn: StateFlow<Boolean> = _accessibilityTurnedOn
 
     private var _availableLanguages = MutableLiveData<List<Language>>(listOf())
     val availableLanguages: LiveData<List<Language>> get() = _availableLanguages
@@ -36,6 +43,7 @@ class LanguagesViewModel @Inject internal constructor(@ApplicationContext contex
     val targetLanguageKey: LiveData<String?> get() = _targetLanguageKey
 
     init {
+
         viewModelScope.launch(Dispatchers.IO) {
             val languagesList = mutableListOf<Language>()
             languagesRepository.getAvailableLanguages().collect { language ->
@@ -59,6 +67,31 @@ class LanguagesViewModel @Inject internal constructor(@ApplicationContext contex
             val targetPosition = languagesRepository.getTargetLanguageKey(context)
             _targetLanguageKey.postValue(targetPosition)
         }
+
+        checkAccessibilityTurnedOn(context)
+    }
+
+    fun checkAccessibilityTurnedOn(context: Context) {
+        viewModelScope.launch {
+            _accessibilityTurnedOn.value = isAccessibilityTurnedOn(context, TranslateAccessibilityService::class.java)
+        }
+    }
+
+    fun showAccessibilityAlertDialog(context: Context) {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.accessibility_check_title)
+            .setMessage(
+                R.string.accessibility_opening
+            )
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.ok,
+            ) { dialog, which -> openAccessibilitySettings(context) }
+            .show()
+    }
+
+    fun openAccessibilitySettings(context: Context) {
+        val accessibilitySettingsIntent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+        context.startActivity(accessibilitySettingsIntent)
     }
 
     fun obtainDownloadedLanguages() {
@@ -74,6 +107,15 @@ class LanguagesViewModel @Inject internal constructor(@ApplicationContext contex
         _downloadingLanguagesKeysSet.value.add(languageTag)
 
         languagesRepository.downloadLanguageModel(languageTag).addOnCompleteListener {
+            _downloadingLanguagesKeysSet.value.remove(languageTag)
+            onCompleteBlock(it.isSuccessful)
+        }
+    }
+
+    fun deleteLanguageModel(languageTag: String, onCompleteBlock: (complete: Boolean) -> Unit) {
+        _downloadingLanguagesKeysSet.value.add(languageTag)
+
+        languagesRepository.deleteLanguageModel(languageTag).addOnCompleteListener {
             _downloadingLanguagesKeysSet.value.remove(languageTag)
             onCompleteBlock(it.isSuccessful)
         }

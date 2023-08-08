@@ -10,11 +10,11 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.flashtranslator.*
+import com.example.flashtranslator.GeneralViewModel
+import com.example.flashtranslator.Language
+import com.example.flashtranslator.R
 import com.example.flashtranslator.databinding.FragmentTranslatorBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -22,7 +22,7 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var _binding: FragmentTranslatorBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: LanguagesViewModel by activityViewModels()
+    private val viewModel: GeneralViewModel by activityViewModels()
 
     private lateinit var spinnerSourceLanguage: Spinner
     private lateinit var spinnerTargetLanguage: Spinner
@@ -31,17 +31,29 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         _binding = FragmentTranslatorBinding.inflate(layoutInflater)
 
-        spinnerSourceLanguage = binding.fromLanguage
-        spinnerTargetLanguage = binding.toLanguage
+        spinnerSourceLanguage = binding.fromLanguageSpinner
+        spinnerTargetLanguage = binding.toLanguageSpinner
 
-        lifecycleScope.launch(Dispatchers.Main) {
-
-            viewModel.downloadedLanguages.observe(viewLifecycleOwner) { languagesList ->
-                languagesList.sortedBy { language ->
-                    language.key
-                }
-                initAdapters(languagesList)
+        viewModel.downloadedLanguages.observe(viewLifecycleOwner) { languagesList ->
+            languagesList.sortedBy { language ->
+                language.key
             }
+            initAdapters(languagesList)
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.accessibilityTurnedOn.collect { turnedOn ->
+                binding.openAccessibilityButton.text =
+                    if (turnedOn) requireContext().getText(R.string.turn_off)
+                    else requireContext().getText(R.string.turn_on)
+            }
+        }
+
+        binding.openAccessibilityButton.setOnClickListener {
+            if(!viewModel.accessibilityTurnedOn.value) {
+                viewModel.showAccessibilityAlertDialog(requireContext())
+            }
+            else viewModel.openAccessibilitySettings(requireContext())
         }
 
         spinnerSourceLanguage.onItemSelectedListener = this
