@@ -82,7 +82,7 @@ class LanguagesListAdapter(private val viewModel: GeneralViewModel)
             }
 
             viewModel.viewModelScope.launch(Dispatchers.Main) {
-                viewModel.downloadingLanguagesKeysSet.collect { set ->
+                viewModel.processingLanguagesKeysSet.collect { set ->
                     set.forEach { key ->
                         if (key == language.key) {
                             downloadDeleteButton.visible(false)
@@ -121,6 +121,8 @@ class LanguagesListAdapter(private val viewModel: GeneralViewModel)
                     downloadDeleteButton.visible(true)
 
                     viewModel.obtainDownloadedLanguages()
+                    viewModel.refreshLanguage(language.key)
+
                     Toast.makeText(itemView.context, "$language language is successfully downloaded", Toast.LENGTH_LONG).show()
                 }
                 else {
@@ -142,6 +144,8 @@ class LanguagesListAdapter(private val viewModel: GeneralViewModel)
                     downloadDeleteButton.visible(true)
 
                     viewModel.obtainDownloadedLanguages()
+                    viewModel.refreshLanguage(language.key)
+
                     Toast.makeText(itemView.context, "$language language is successfully deleted", Toast.LENGTH_LONG).show()
                 }
             }

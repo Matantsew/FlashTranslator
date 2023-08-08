@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
 import com.example.latranslator.utils.isAccessibilityTurnedOn
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,8 +34,8 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     private var _downloadedLanguages = MutableLiveData<List<Language>>(listOf())
     val downloadedLanguages: LiveData<List<Language>> get() = _downloadedLanguages
 
-    private var _downloadingLanguagesKeysSet = MutableStateFlow<HashSet<String>>(hashSetOf())
-    val downloadingLanguagesKeysSet: StateFlow<HashSet<String>> = _downloadingLanguagesKeysSet
+    private var _processingLanguagesKeysSet = MutableStateFlow<HashSet<String>>(hashSetOf())
+    val processingLanguagesKeysSet: StateFlow<HashSet<String>> = _processingLanguagesKeysSet
 
     private var _sourceLanguageKey = MutableLiveData<String?>()
     val sourceLanguageKey: LiveData<String?> get() = _sourceLanguageKey
@@ -102,21 +103,21 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
         }
     }
 
-    fun obtainOrWaitLanguageModelRemotely(languageTag: String, onCompleteBlock: (complete: Boolean) -> Unit) {
+    fun obtainOrWaitLanguageModelRemotely(languageKey: String, onCompleteBlock: (complete: Boolean) -> Unit) {
 
-        _downloadingLanguagesKeysSet.value.add(languageTag)
+        _processingLanguagesKeysSet.value.add(languageKey)
 
-        languagesRepository.downloadLanguageModel(languageTag).addOnCompleteListener {
-            _downloadingLanguagesKeysSet.value.remove(languageTag)
+        languagesRepository.downloadLanguageModel(languageKey).addOnCompleteListener {
+            _processingLanguagesKeysSet.value.remove(languageKey)
             onCompleteBlock(it.isSuccessful)
         }
     }
 
-    fun deleteLanguageModel(languageTag: String, onCompleteBlock: (complete: Boolean) -> Unit) {
-        _downloadingLanguagesKeysSet.value.add(languageTag)
+    fun deleteLanguageModel(languageKey: String, onCompleteBlock: (complete: Boolean) -> Unit) {
+        _processingLanguagesKeysSet.value.add(languageKey)
 
-        languagesRepository.deleteLanguageModel(languageTag).addOnCompleteListener {
-            _downloadingLanguagesKeysSet.value.remove(languageTag)
+        languagesRepository.deleteLanguageModel(languageKey).addOnCompleteListener {
+            _processingLanguagesKeysSet.value.remove(languageKey)
             onCompleteBlock(it.isSuccessful)
         }
     }
@@ -132,6 +133,14 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
         viewModelScope.launch(Dispatchers.IO) {
             languagesRepository.setTargetLanguageKey(context, key)
             _targetLanguageKey.postValue(key)
+        }
+    }
+
+    fun refreshLanguage(languageKey: String) {
+        LanguagesHelper.isLanguageModelDownloaded(languageKey).addOnSuccessListener { isDownLoaded ->
+            _availableLanguages.value?.find {
+                it.key == languageKey
+            }?.isDownloaded = isDownLoaded
         }
     }
 }

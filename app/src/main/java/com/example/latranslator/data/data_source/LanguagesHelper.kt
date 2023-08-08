@@ -16,14 +16,14 @@ object LanguagesHelper {
     fun getDownloadedLanguagesModels(): Task<MutableSet<TranslateRemoteModel>>
         = modelManager.getDownloadedModels(TranslateRemoteModel::class.java)
 
-    fun isLanguageModelDownloaded(languageTag: String): Task<Boolean> {
-        val model = buildTranslateRemoteModelByTag(languageTag)
+    fun isLanguageModelDownloaded(languageKey: String): Task<Boolean> {
+        val model = buildTranslateRemoteModelByLanguageKey(languageKey)
         return modelManager.isModelDownloaded(model)
     }
 
-    fun downloadRemotelyLanguageModel(languageTag: String): Task<Void> {
+    fun downloadRemotelyLanguageModel(languageKey: String): Task<Void> {
 
-        val model = buildTranslateRemoteModelByTag(languageTag)
+        val model = buildTranslateRemoteModelByLanguageKey(languageKey)
 
         val conditions = DownloadConditions.Builder()
             .build()
@@ -31,9 +31,9 @@ object LanguagesHelper {
         return modelManager.download(model, conditions)
     }
 
-    fun deleteRemotelyLanguageModel(languageTag: String) : Task<Void> {
+    fun deleteRemotelyLanguageModel(languageKey: String) : Task<Void> {
 
-        val model = buildTranslateRemoteModelByTag(languageTag)
+        val model = buildTranslateRemoteModelByLanguageKey(languageKey)
 
         return modelManager.deleteDownloadedModel(model)
     }
@@ -53,5 +53,5 @@ object LanguagesHelper {
         return Translation.getClient(options)
     }
 
-    private fun buildTranslateRemoteModelByTag(languageTag: String) = TranslateRemoteModel.Builder(languageTag).build()
+    private fun buildTranslateRemoteModelByLanguageKey(languageKey: String) = TranslateRemoteModel.Builder(languageKey).build()
 }

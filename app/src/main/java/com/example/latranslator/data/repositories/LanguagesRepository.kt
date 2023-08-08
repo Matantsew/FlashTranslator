@@ -38,8 +38,8 @@ class LanguagesRepository @Inject constructor() {
         }
     }
 
-    fun downloadLanguageModel(languageTag: String) = LanguagesHelper.downloadRemotelyLanguageModel(languageTag)
-    fun deleteLanguageModel(languageTag: String) = LanguagesHelper.deleteRemotelyLanguageModel(languageTag)
+    fun downloadLanguageModel(languageKey: String) = LanguagesHelper.downloadRemotelyLanguageModel(languageKey)
+    fun deleteLanguageModel(languageKey: String) = LanguagesHelper.deleteRemotelyLanguageModel(languageKey)
 
     suspend fun setSourceLanguageKey(context: Context, key: String) {
         context
