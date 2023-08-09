@@ -1,5 +1,6 @@
 package com.example.latranslator.fragments
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,9 +44,14 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         lifecycleScope.launchWhenCreated {
             viewModel.accessibilityTurnedOn.collect { turnedOn ->
-                binding.openAccessibilityButton.text =
-                    if (turnedOn) requireContext().getText(R.string.turn_off)
-                    else requireContext().getText(R.string.turn_on)
+                if (turnedOn) {
+                    binding.openAccessibilityButton.text = requireContext().getText(R.string.turn_off)
+                    binding.openAccessibilityButton.backgroundTintList = ColorStateList.valueOf(requireContext().getColor(R.color.gray))
+                }
+                else {
+                    binding.openAccessibilityButton.text = requireContext().getText(R.string.turn_on)
+                    binding.openAccessibilityButton.backgroundTintList = ColorStateList.valueOf(requireContext().getColor(R.color.gray_sea))
+                }
             }
         }
 
