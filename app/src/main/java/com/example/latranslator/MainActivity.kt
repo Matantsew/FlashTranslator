@@ -35,24 +35,27 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        changeFragment<TranslatorFragment>()
+        changeFragment<TranslatorFragment>(null)
 
         binding.bottomNavigation.setOnItemSelectedListener {
 
-            when(it.itemId){
+            val currentFragment = supportFragmentManager.findFragmentById(binding.container.id)?.apply {
+                this::class.java
+            } ?: Fragment()
 
+            when(it.itemId) {
                 R.id.translator_item -> {
-                    changeFragment<TranslatorFragment>()
+                    changeFragment<TranslatorFragment>(currentFragment)
                     true
                 }
 
                 R.id.languages_item -> {
-                    changeFragment<LanguagesFragment>()
+                    changeFragment<LanguagesFragment>(currentFragment)
                     true
                 }
 
                 R.id.settings_item -> {
-                    changeFragment<SettingsFragment>()
+                    changeFragment<SettingsFragment>(currentFragment)
                     true
                 }
 
@@ -63,8 +66,31 @@ class MainActivity : AppCompatActivity() {
         checkDrawOverlayPermission()
     }
 
-    private inline fun <reified F : Fragment>changeFragment() {
+    private inline fun <reified F : Fragment> changeFragment(currentFragment: Fragment?) {
         supportFragmentManager.commit {
+
+            currentFragment?.let { current ->
+                if(current::class.java == F::class.java)return@commit
+
+                when(current::class.java) {
+                    TranslatorFragment::class.java -> {
+                        setCustomAnimations(R.anim.from_right, R.anim.to_left)
+                    }
+                    LanguagesFragment::class.java -> {
+                        when(F::class.java) {
+                            TranslatorFragment::class.java -> setCustomAnimations(R.anim.from_left, R.anim.to_right)
+                            SettingsFragment::class.java -> setCustomAnimations(R.anim.from_right, R.anim.to_left)
+                            else -> {
+                            }
+                        }
+                    }
+                    SettingsFragment::class.java -> {
+                        setCustomAnimations(R.anim.from_left, R.anim.to_right)
+                    }
+                    else -> return@commit
+                }
+            }
+
             setReorderingAllowed(true)
             replace<F>(binding.container.id)
         }
