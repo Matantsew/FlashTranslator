@@ -2,6 +2,7 @@ package com.example.latranslator
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageInfo
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -143,10 +144,18 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.about_menu_item -> {
+
+                val pInfo: PackageInfo = packageManager.getPackageInfo(packageName, 0)
+                val version = pInfo.versionName
+
+                val message = "${getText(R.string.version)} $version " +
+                        "\n${getText(R.string.first_version_released)} 2023"
+                        "\n${getText(R.string.email)}"
+
                 AlertDialog.Builder(this)
                     .setIcon(R.drawable.ic_logo)
                     .setTitle(R.string.app_name)
-                    .setMessage(R.string.about_info)
+                    .setMessage(message)
                     .setNeutralButton(R.string.ok, null)
                     .show()
             }

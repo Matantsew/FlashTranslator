@@ -38,10 +38,10 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     val processingLanguagesKeysSet: StateFlow<HashSet<String>> = _processingLanguagesKeysSet
 
     private var _sourceLanguageKey = MutableLiveData<String?>()
-    val sourceLanguageKey: LiveData<String?> get() = _sourceLanguageKey
+    val fromLanguageKey: LiveData<String?> get() = _sourceLanguageKey
 
     private var _targetLanguageKey = MutableLiveData<String?>()
-    val targetLanguageKey: LiveData<String?> get() = _targetLanguageKey
+    val toLanguageKey: LiveData<String?> get() = _targetLanguageKey
 
     init {
 
@@ -122,14 +122,14 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
         }
     }
 
-    fun saveSourceLanguage(context: Context, key: String) {
+    fun setFromLanguage(context: Context, key: String) {
         viewModelScope.launch(Dispatchers.IO) {
             languagesRepository.setSourceLanguageKey(context, key)
             _sourceLanguageKey.postValue(key)
         }
     }
 
-    fun saveTargetLanguage(context: Context, key: String) {
+    fun setToLanguage(context: Context, key: String) {
         viewModelScope.launch(Dispatchers.IO) {
             languagesRepository.setTargetLanguageKey(context, key)
             _targetLanguageKey.postValue(key)
