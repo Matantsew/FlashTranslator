@@ -41,7 +41,7 @@ class LanguagesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
-        _binding = FragmentLanguagesBinding.inflate(layoutInflater)
+        _binding = FragmentLanguagesBinding.inflate(inflater)
 
         with(binding.listViewLanguages) {
             layoutManager = LinearLayoutManager(context)

@@ -28,6 +28,9 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     private var _accessibilityTurnedOn = MutableStateFlow(false)
     val accessibilityTurnedOn: StateFlow<Boolean> = _accessibilityTurnedOn
 
+    private var _frameCornersRadius = MutableStateFlow(0f)
+    val frameCornersRadius: StateFlow<Float> = _frameCornersRadius
+
     private var _availableLanguages = MutableLiveData<List<Language>>(listOf())
     val availableLanguages: LiveData<List<Language>> get() = _availableLanguages
 
@@ -137,10 +140,22 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     }
 
     fun refreshLanguage(languageKey: String) {
-        LanguagesHelper.isLanguageModelDownloaded(languageKey).addOnSuccessListener { isDownLoaded ->
+        LanguagesHelper.isLanguageModelDownloaded(languageKey).addOnSuccessListener { isDownloaded ->
             _availableLanguages.value?.find {
                 it.key == languageKey
-            }?.isDownloaded = isDownLoaded
+            }?.isDownloaded = isDownloaded
+        }
+    }
+
+    fun setTranslationFrameCornerRadius(context: Context, radius: Float) {
+        viewModelScope.launch(Dispatchers.IO) {
+            languagesRepository.setTranslationFrameCornerRadius(context, radius)
+        }
+    }
+
+    fun obtainTranslationFrameCornerRadius(context: Context) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _frameCornersRadius.value = languagesRepository.getTranslationFrameCornerRadius(context) ?: 0f
         }
     }
 }

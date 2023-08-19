@@ -8,7 +8,7 @@
     tools:context=".fragments.TranslatorFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/language_selectir"
+        android:id="@+id/language_selector"
         android:orientation="vertical"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"

@@ -5,14 +5,14 @@ import android.view.View
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.latranslator.DATA_STORE_SOURCE_TARGET_LANGUAGES
+import com.example.latranslator.DATA_STORE_MAIN
 
 fun View.visible(v: Boolean) {
     visibility = if(v) View.VISIBLE else View.GONE
 }
 
-val Context.obtainLanguageSourceTargetDataStore: DataStore<Preferences> by preferencesDataStore(
-    name = DATA_STORE_SOURCE_TARGET_LANGUAGES
+val Context.dataStoreMain: DataStore<Preferences> by preferencesDataStore(
+    name = DATA_STORE_MAIN
 )
 
 fun String.convertLanguageKeyToName() =

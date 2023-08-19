@@ -30,7 +30,7 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
-        _binding = FragmentTranslatorBinding.inflate(layoutInflater)
+        _binding = FragmentTranslatorBinding.inflate(inflater)
 
         fromLanguageSpinner = binding.fromLanguageSpinner
         toLanguageSpinner = binding.toLanguageSpinner

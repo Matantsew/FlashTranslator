@@ -2,7 +2,10 @@ package com.example.latranslator
 
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.PixelFormat
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RoundRectShape
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -10,10 +13,11 @@ import android.view.View
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.widget.FrameLayout
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.databinding.TranslationLayoutBinding
-import com.example.latranslator.utils.obtainLanguageSourceTargetDataStore
+import com.example.latranslator.utils.dataStoreMain
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -70,19 +74,45 @@ class TranslateAccessibilityService : AccessibilityService() {
 
             if(!source.isFocused)return@runBlocking
 
-            val sourceLanguage = // TODO: Consider anther option to obtain sourceLanguage
+            val radius = // TODO: Consider anther option to obtain radius
                 this@TranslateAccessibilityService
-                    .obtainLanguageSourceTargetDataStore
+                    .dataStoreMain
                     .data
                     .first()
-                    .asMap()[stringPreferencesKey(SOURCE_LANGUAGE_KEY_PREF_KEY)] as String? ?: return@runBlocking
+                    .asMap()[floatPreferencesKey(DS_TRANSLATION_FRAME_CORNERS_RADIUS)] as Float?
+                    ?: 0f
+
+            val shape = ShapeDrawable(
+                RoundRectShape(
+                    floatArrayOf(
+                        radius,
+                        radius,
+                        radius,
+                        radius,
+                        radius,
+                        radius,
+                        radius,
+                        radius
+                    ), null, null
+                )
+            )
+            shape.paint.color = Color.BLUE
+            shape.paint.strokeWidth = 15f
+            frameLayout.background = shape
+
+            val sourceLanguage = // TODO: Consider anther option to obtain sourceLanguage
+                this@TranslateAccessibilityService
+                    .dataStoreMain
+                    .data
+                    .first()
+                    .asMap()[stringPreferencesKey(DS_SOURCE_LANGUAGE_KEY_PREF_KEY)] as String? ?: return@runBlocking
 
             val targetLanguage = // TODO: Consider anther option to obtain targetLanguage
                 this@TranslateAccessibilityService
-                    .obtainLanguageSourceTargetDataStore
+                    .dataStoreMain
                     .data
                     .first()
-                    .asMap()[stringPreferencesKey(TARGET_LANGUAGE_KEY_PREF_KEY)] as String? ?: return@runBlocking
+                    .asMap()[stringPreferencesKey(DS_TARGET_LANGUAGE_KEY_PREF_KEY)] as String? ?: return@runBlocking
 
             val translator = LanguagesHelper.getTranslatorClient(sourceLanguage, targetLanguage)
 
