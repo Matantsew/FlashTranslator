@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.latranslator.data.Language
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
+import com.example.latranslator.data.repositories.ParametersRepository
 import com.example.latranslator.utils.isAccessibilityTurnedOn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -44,6 +45,9 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     // Frame parameters (UI):
     private var _frameCornersRadius = MutableStateFlow(0f)
     val frameCornersRadius: StateFlow<Float> = _frameCornersRadius
+
+    private var _frameTextSize = MutableStateFlow(0f)
+    val frameTextSize: StateFlow<Float> = _frameTextSize
 
     private var _frameBackgroundColor = MutableStateFlow(0f)
     val frameBackgroundColor: StateFlow<Float> = _frameBackgroundColor
@@ -95,7 +99,7 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
             )
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.ok,
-            ) { dialog, which -> openAccessibilitySettings(context) }
+            ) { _, _ -> openAccessibilitySettings(context) }
             .show()
     }
 
@@ -155,13 +159,25 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
     fun setTranslationFrameCornerRadius(context: Context, radius: Float) {
         viewModelScope.launch(Dispatchers.IO) {
-            LanguagesRepository.setTranslationFrameCornerRadius(context, radius)
+            ParametersRepository.setTranslationFrameCornerRadius(context, radius)
         }
     }
 
     fun obtainTranslationFrameCornerRadius(context: Context) {
         viewModelScope.launch(Dispatchers.Main) {
-            _frameCornersRadius.value = LanguagesRepository.getTranslationFrameCornerRadius(context) ?: 0f
+            _frameCornersRadius.value = ParametersRepository.getTranslationFrameCornerRadius(context) ?: 0f
+        }
+    }
+
+    fun setTranslationFrameTextSize(context: Context, textSize: Float) {
+        viewModelScope.launch(Dispatchers.IO) {
+            ParametersRepository.setTranslationFrameTextSize(context, textSize)
+        }
+    }
+
+    fun obtainTranslationFrameTextSize(context: Context) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _frameTextSize.value = ParametersRepository.getTranslationFrameTextSize(context) ?: 0f
         }
     }
 }

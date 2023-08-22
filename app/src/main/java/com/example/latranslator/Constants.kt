@@ -9,4 +9,5 @@ const val DS_SOURCE_LANGUAGE_KEY_PREF_KEY = "sourceTag"
 const val DS_TARGET_LANGUAGE_KEY_PREF_KEY = "targetTag"
 
 const val DS_TRANSLATION_FRAME_CORNERS_RADIUS = "translationFrameCornersRadius"
+const val DS_TRANSLATION_FRAME_TEXT_SIZE = "translationFrameTextSize"
 /* --- Data Store section end --- */

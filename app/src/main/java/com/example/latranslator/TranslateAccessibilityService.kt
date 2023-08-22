@@ -15,6 +15,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.widget.FrameLayout
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
+import com.example.latranslator.data.repositories.ParametersRepository
 import com.example.latranslator.databinding.TranslationLayoutBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
@@ -69,7 +70,7 @@ class TranslateAccessibilityService : AccessibilityService() {
 
             if(!source.isFocused)return@runBlocking
 
-            val radius = LanguagesRepository
+            val radius = ParametersRepository
                 .getTranslationFrameCornerRadius(this@TranslateAccessibilityService) ?: 0f
 
             val shape = ShapeDrawable(
@@ -86,6 +87,10 @@ class TranslateAccessibilityService : AccessibilityService() {
                     ), null, null
                 )
             )
+
+            translationLayoutBinding.textTranslation.textSize = ParametersRepository
+                .getTranslationFrameTextSize(this@TranslateAccessibilityService) ?: 0f
+
             shape.paint.color = Color.BLUE
             shape.paint.strokeWidth = 15f
             frameLayout.background = shape

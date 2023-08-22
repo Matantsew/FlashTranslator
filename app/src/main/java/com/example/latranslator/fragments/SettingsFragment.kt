@@ -15,9 +15,15 @@ import androidx.lifecycle.lifecycleScope
 import com.example.latranslator.GeneralViewModel
 import com.example.latranslator.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
+
+    private val mainScope = CoroutineScope(Dispatchers.Main)
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
@@ -28,18 +34,11 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater)
 
         viewModel.obtainTranslationFrameCornerRadius(requireContext())
-
-        binding.seekBarRadius.progress = viewModel.frameCornersRadius.value.toInt()
-
-        lifecycleScope.launchWhenCreated {
-            viewModel.frameCornersRadius.collect {
-                binding.seekBarRadius.progress = it.toInt()
-            }
-        }
+        viewModel.obtainTranslationFrameTextSize(requireContext())
 
         binding.seekBarRadius.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progressRadius: Int, b: Boolean) {
-                refreshPreview(progressRadius.toFloat())
+                refreshPreview(cornersRadius = progressRadius.toFloat())
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -51,27 +50,68 @@ class SettingsFragment : Fragment() {
             }
         })
 
+        binding.seekBarTextSize.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progressTextSize: Int, b: Boolean) {
+                refreshPreview(textSize = progressTextSize.toFloat())
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                val textSize = seekBar.progress.toFloat()
+                viewModel.setTranslationFrameTextSize(requireContext(), textSize)
+            }
+        })
+
         return binding.root
     }
 
-    private fun refreshPreview(progressRadius: Float) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val shape = ShapeDrawable(
-            RoundRectShape(
-                floatArrayOf(
-                    progressRadius,
-                    progressRadius,
-                    progressRadius,
-                    progressRadius,
-                    progressRadius,
-                    progressRadius,
-                    progressRadius,
-                    progressRadius
-                ), null, null
+        lifecycleScope.launchWhenCreated {
+            viewModel.frameCornersRadius.collect {
+                binding.seekBarRadius.progress = it.toInt()
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.frameTextSize.collect {
+                binding.seekBarTextSize.progress = it.toInt()
+            }
+        }
+    }
+
+    private fun refreshPreview(
+        cornersRadius: Float? = null,
+        textSize: Float? = null
+    ) {
+        mainScope.launch {
+            viewModel.obtainTranslationFrameCornerRadius(requireContext())
+            viewModel.obtainTranslationFrameTextSize(requireContext())
+
+            val r = cornersRadius ?: async { viewModel.frameCornersRadius.value }.await()
+            val s = textSize ?: async { viewModel.frameTextSize.value }.await()
+
+            val shape = ShapeDrawable(
+                RoundRectShape(
+                    floatArrayOf(
+                        r,
+                        r,
+                        r,
+                        r,
+                        r,
+                        r,
+                        r,
+                        r
+                    ), null, null
+                )
             )
-        )
 
-        shape.paint.color = Color.LTGRAY
-        binding.translationFrame.root.background = shape
+            shape.paint.color = Color.LTGRAY
+            binding.translationFrame.textTranslation.textSize = s
+            binding.translationFrame.root.background = shape
+        }
     }
 }
