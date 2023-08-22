@@ -1,4 +1,4 @@
-package com.example.latranslator
+package com.example.latranslator.data
 
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.utils.convertLanguageKeyToName

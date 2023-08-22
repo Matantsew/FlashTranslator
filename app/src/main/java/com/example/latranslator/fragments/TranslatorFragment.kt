@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.latranslator.GeneralViewModel
-import com.example.latranslator.Language
+import com.example.latranslator.data.Language
 import com.example.latranslator.R
 import com.example.latranslator.databinding.FragmentTranslatorBinding
 import dagger.hilt.android.AndroidEntryPoint

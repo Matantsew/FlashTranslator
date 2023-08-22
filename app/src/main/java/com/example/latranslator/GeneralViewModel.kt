@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.latranslator.data.Language
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
 import com.example.latranslator.utils.isAccessibilityTurnedOn
@@ -21,16 +22,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class GeneralViewModel @Inject internal constructor(@ApplicationContext context: Context,
-                                                    private val languagesRepository: LanguagesRepository)
+class GeneralViewModel @Inject internal constructor(@ApplicationContext context: Context)
     : ViewModel() {
 
-    private var _accessibilityTurnedOn = MutableStateFlow(false)
-    val accessibilityTurnedOn: StateFlow<Boolean> = _accessibilityTurnedOn
-
-    private var _frameCornersRadius = MutableStateFlow(0f)
-    val frameCornersRadius: StateFlow<Float> = _frameCornersRadius
-
+    // Languages:
     private var _availableLanguages = MutableLiveData<List<Language>>(listOf())
     val availableLanguages: LiveData<List<Language>> get() = _availableLanguages
 
@@ -46,11 +41,21 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     private var _targetLanguageKey = MutableLiveData<String?>()
     val toLanguageKey: LiveData<String?> get() = _targetLanguageKey
 
-    init {
+    // Frame parameters (UI):
+    private var _frameCornersRadius = MutableStateFlow(0f)
+    val frameCornersRadius: StateFlow<Float> = _frameCornersRadius
 
+    private var _frameBackgroundColor = MutableStateFlow(0f)
+    val frameBackgroundColor: StateFlow<Float> = _frameBackgroundColor
+
+    // Other:
+    private var _accessibilityTurnedOn = MutableStateFlow(false)
+    val accessibilityTurnedOn: StateFlow<Boolean> = _accessibilityTurnedOn
+
+    init {
         viewModelScope.launch(Dispatchers.IO) {
             val languagesList = mutableListOf<Language>()
-            languagesRepository.getAvailableLanguages().collect { language ->
+            LanguagesRepository.getAvailableLanguages().collect { language ->
                 languagesList.add(language)
             }
 
@@ -63,12 +68,12 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
         viewModelScope.launch(Dispatchers.Main) {
 
-            val sourcePosition = languagesRepository.getSourceLanguageKey(context)
+            val sourcePosition = LanguagesRepository.getSourceLanguageKey(context)
             _sourceLanguageKey.postValue(sourcePosition)
         }
 
         viewModelScope.launch(Dispatchers.Main) {
-            val targetPosition = languagesRepository.getTargetLanguageKey(context)
+            val targetPosition = LanguagesRepository.getTargetLanguageKey(context)
             _targetLanguageKey.postValue(targetPosition)
         }
 
@@ -77,7 +82,8 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
     fun checkAccessibilityTurnedOn(context: Context) {
         viewModelScope.launch {
-            _accessibilityTurnedOn.value = isAccessibilityTurnedOn(context, TranslateAccessibilityService::class.java)
+            _accessibilityTurnedOn.value = isAccessibilityTurnedOn(context,
+                TranslateAccessibilityService::class.java)
         }
     }
 
@@ -100,7 +106,7 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
     fun obtainDownloadedLanguages() {
         viewModelScope.launch(Dispatchers.Main) {
-            languagesRepository.getDownloadedLanguages { languagesList ->
+            LanguagesRepository.getDownloadedLanguages { languagesList ->
                 _downloadedLanguages.value = languagesList
             }
         }
@@ -110,7 +116,7 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
         _processingLanguagesKeysSet.value.add(languageKey)
 
-        languagesRepository.downloadLanguageModel(languageKey).addOnCompleteListener {
+        LanguagesRepository.downloadLanguageModel(languageKey).addOnCompleteListener {
             _processingLanguagesKeysSet.value.remove(languageKey)
             onCompleteBlock(it.isSuccessful)
         }
@@ -119,7 +125,7 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     fun deleteLanguageModel(languageKey: String, onCompleteBlock: (complete: Boolean) -> Unit) {
         _processingLanguagesKeysSet.value.add(languageKey)
 
-        languagesRepository.deleteLanguageModel(languageKey).addOnCompleteListener {
+        LanguagesRepository.deleteLanguageModel(languageKey).addOnCompleteListener {
             _processingLanguagesKeysSet.value.remove(languageKey)
             onCompleteBlock(it.isSuccessful)
         }
@@ -127,14 +133,14 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
     fun setFromLanguage(context: Context, key: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            languagesRepository.setSourceLanguageKey(context, key)
+            LanguagesRepository.setSourceLanguageKey(context, key)
             _sourceLanguageKey.postValue(key)
         }
     }
 
     fun setToLanguage(context: Context, key: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            languagesRepository.setTargetLanguageKey(context, key)
+            LanguagesRepository.setTargetLanguageKey(context, key)
             _targetLanguageKey.postValue(key)
         }
     }
@@ -149,13 +155,13 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
     fun setTranslationFrameCornerRadius(context: Context, radius: Float) {
         viewModelScope.launch(Dispatchers.IO) {
-            languagesRepository.setTranslationFrameCornerRadius(context, radius)
+            LanguagesRepository.setTranslationFrameCornerRadius(context, radius)
         }
     }
 
     fun obtainTranslationFrameCornerRadius(context: Context) {
         viewModelScope.launch(Dispatchers.Main) {
-            _frameCornersRadius.value = languagesRepository.getTranslationFrameCornerRadius(context) ?: 0f
+            _frameCornersRadius.value = LanguagesRepository.getTranslationFrameCornerRadius(context) ?: 0f
         }
     }
 }

@@ -4,20 +4,17 @@ import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.example.latranslator.Language
 import com.example.latranslator.DS_SOURCE_LANGUAGE_KEY_PREF_KEY
 import com.example.latranslator.DS_TARGET_LANGUAGE_KEY_PREF_KEY
 import com.example.latranslator.DS_TRANSLATION_FRAME_CORNERS_RADIUS
+import com.example.latranslator.data.Language
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.utils.dataStoreMain
 import com.google.mlkit.nl.translate.TranslateLanguage
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class LanguagesRepository @Inject constructor() {
+object LanguagesRepository {
 
      fun getAvailableLanguages() = flow {
 

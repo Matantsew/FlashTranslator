@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
-import com.example.latranslator.Language
+import com.example.latranslator.data.Language
 import com.example.latranslator.GeneralViewModel
 import com.example.latranslator.R
 import com.example.latranslator.utils.visible
