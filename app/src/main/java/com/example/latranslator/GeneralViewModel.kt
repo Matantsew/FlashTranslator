@@ -49,8 +49,11 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     private var _frameTextSize = MutableStateFlow(0f)
     val frameTextSize: StateFlow<Float> = _frameTextSize
 
-    private var _frameBackgroundColor = MutableStateFlow(0f)
-    val frameBackgroundColor: StateFlow<Float> = _frameBackgroundColor
+    private var _frameBackgroundColor = MutableStateFlow(0)
+    val frameBackgroundColor: StateFlow<Int> = _frameBackgroundColor
+
+    private var _frameTextColor = MutableStateFlow(0)
+    val frameTextColor: StateFlow<Int> = _frameTextColor
 
     // Other:
     private var _accessibilityTurnedOn = MutableStateFlow(false)
@@ -71,7 +74,6 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
         obtainDownloadedLanguages()
 
         viewModelScope.launch(Dispatchers.Main) {
-
             val sourcePosition = LanguagesRepository.getSourceLanguageKey(context)
             _sourceLanguageKey.postValue(sourcePosition)
         }
@@ -79,6 +81,16 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
         viewModelScope.launch(Dispatchers.Main) {
             val targetPosition = LanguagesRepository.getTargetLanguageKey(context)
             _targetLanguageKey.postValue(targetPosition)
+        }
+
+        viewModelScope.launch(Dispatchers.Main) {
+            val color = ParametersRepository.getFrameBackgroundColor(context) ?: 0
+            _frameBackgroundColor.value = color
+        }
+
+        viewModelScope.launch(Dispatchers.Main) {
+            val color = ParametersRepository.getFrameTextColor(context) ?: 0
+            _frameTextColor.value = color
         }
 
         checkAccessibilityTurnedOn(context)
@@ -117,7 +129,6 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     }
 
     fun obtainOrWaitLanguageModelRemotely(languageKey: String, onCompleteBlock: (complete: Boolean) -> Unit) {
-
         _processingLanguagesKeysSet.value.add(languageKey)
 
         LanguagesRepository.downloadLanguageModel(languageKey).addOnCompleteListener {
@@ -178,6 +189,24 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
     fun obtainTranslationFrameTextSize(context: Context) {
         viewModelScope.launch(Dispatchers.Main) {
             _frameTextSize.value = ParametersRepository.getTranslationFrameTextSize(context) ?: 0f
+        }
+    }
+
+    fun setFrameBackgroundColor(context: Context, color: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            ParametersRepository.setFrameBackgroundColor(context, color)
+            withContext(Dispatchers.Main) {
+                _frameBackgroundColor.value = color
+            }
+        }
+    }
+
+    fun setFrameTextColor(context: Context, color: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            ParametersRepository.setFrameTextColor(context, color)
+            withContext(Dispatchers.Main) {
+                _frameTextColor.value = color
+            }
         }
     }
 }

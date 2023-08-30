@@ -1,5 +1,6 @@
 package com.example.latranslator.fragments
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
@@ -14,11 +15,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.latranslator.GeneralViewModel
 import com.example.latranslator.databinding.FragmentSettingsBinding
+import com.example.latranslator.utils.customAmbilWarnaColorPicker.CustomAmbilWarnaDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import yuku.ambilwarna.AmbilWarnaDialog
+import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -80,6 +84,42 @@ class SettingsFragment : Fragment() {
             viewModel.frameTextSize.collect {
                 binding.seekBarTextSize.progress = it.toInt()
             }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.frameBackgroundColor.collect { color ->
+                binding.buttonBackgroundColor.backgroundTintList = ColorStateList.valueOf(color)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.frameTextColor.collect { color ->
+                binding.buttonFrameTextColor.backgroundTintList = ColorStateList.valueOf(color)
+            }
+        }
+
+        binding.buttonBackgroundColor.setOnClickListener {
+            CustomAmbilWarnaDialog(requireContext(),
+                viewModel.frameBackgroundColor.value,
+                object : OnAmbilWarnaListener {
+                    override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
+                        viewModel.setFrameBackgroundColor(requireContext(), color)
+                    }
+                    override fun onCancel(dialog: AmbilWarnaDialog?) {
+                    }
+                }).show()
+        }
+
+        binding.buttonFrameTextColor.setOnClickListener {
+            CustomAmbilWarnaDialog(requireContext(),
+                viewModel.frameTextColor.value,
+                object : OnAmbilWarnaListener {
+                    override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
+                        viewModel.setFrameTextColor(requireContext(), color)
+                    }
+                    override fun onCancel(dialog: AmbilWarnaDialog?) {
+                    }
+                }).show()
         }
     }
 

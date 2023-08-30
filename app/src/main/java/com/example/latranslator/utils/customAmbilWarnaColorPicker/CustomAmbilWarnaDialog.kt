@@ -1,4 +1,4 @@
-package com.example.latranslator.utils.CustomAmbilWarnaColorPicker
+package com.example.latranslator.utils.customAmbilWarnaColorPicker
 
 import android.app.AlertDialog
 import android.content.Context
@@ -162,7 +162,6 @@ class CustomAmbilWarnaDialog(context: Context,
             }
         })
     }
-
 
     private fun getColor(): Int {
         val argb = Color.HSVToColor(currentColorHsv)

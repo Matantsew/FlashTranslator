@@ -2,6 +2,7 @@ package com.example.latranslator
 
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PixelFormat
 import android.graphics.drawable.ShapeDrawable
@@ -91,6 +92,12 @@ class TranslateAccessibilityService : AccessibilityService() {
             translationLayoutBinding.textTranslation.textSize = ParametersRepository
                 .getTranslationFrameTextSize(this@TranslateAccessibilityService) ?: 0f
 
+            val backgroundColor = ParametersRepository.getFrameBackgroundColor(this@TranslateAccessibilityService) ?: 0
+            translationLayoutBinding.root.backgroundTintList = ColorStateList.valueOf(backgroundColor)
+
+            val textColor = ParametersRepository.getFrameTextColor(this@TranslateAccessibilityService) ?: 0
+            translationLayoutBinding.textTranslation.setTextColor(textColor)
+
             shape.paint.color = Color.BLUE
             shape.paint.strokeWidth = 15f
             frameLayout.background = shape
@@ -111,7 +118,6 @@ class TranslateAccessibilityService : AccessibilityService() {
 
             val params = createParameters(xOffset, yOffset)
             translator.translate(selectedText).addOnSuccessListener {
-
                 translationLayoutBinding.textTranslation.text = it
                 windowManager.addView(frameLayout, params)
             }

@@ -1,4 +1,4 @@
-package com.example.latranslator.utils.CustomAmbilWarnaColorPicker;
+package com.example.latranslator.utils.customAmbilWarnaColorPicker;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
