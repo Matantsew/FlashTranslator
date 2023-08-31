@@ -1,7 +1,6 @@
 package com.example.latranslator.fragments
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.os.Bundle
@@ -89,12 +88,14 @@ class SettingsFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             viewModel.frameBackgroundColor.collect { color ->
                 binding.buttonBackgroundColor.backgroundTintList = ColorStateList.valueOf(color)
+                refreshPreview()
             }
         }
 
         lifecycleScope.launchWhenCreated {
             viewModel.frameTextColor.collect { color ->
                 binding.buttonFrameTextColor.backgroundTintList = ColorStateList.valueOf(color)
+                refreshPreview()
             }
         }
 
@@ -149,8 +150,9 @@ class SettingsFragment : Fragment() {
                 )
             )
 
-            shape.paint.color = Color.LTGRAY
+            shape.paint.color = viewModel.frameBackgroundColor.value
             binding.translationFrame.textTranslation.textSize = s
+            binding.translationFrame.textTranslation.setTextColor(viewModel.frameTextColor.value)
             binding.translationFrame.root.background = shape
         }
     }
