@@ -1,7 +1,5 @@
 package com.example.latranslator
 
-const val CHANNEL_DEFAULT_IMPORTANCE = "CHANNEL_DEFAULT_IMPORTANCE"
-
 /* Data Store section start*/
 const val DATA_STORE_MAIN = "dataStoreMain"
 

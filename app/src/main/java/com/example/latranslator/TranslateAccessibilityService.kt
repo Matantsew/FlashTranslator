@@ -3,11 +3,9 @@ package com.example.latranslator
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.PixelFormat
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -24,16 +22,19 @@ import kotlinx.coroutines.runBlocking
 @AndroidEntryPoint
 class TranslateAccessibilityService : AccessibilityService() {
 
+    private var xOverlayOffset = 0
+    private var yOverlayOffset = 0
+
     private lateinit var windowManager: WindowManager
-    private lateinit var translationLayoutBinding: TranslationLayoutBinding
-    private lateinit var frameLayout: FrameLayout
+    private lateinit var translationOverlayLayoutBinding: TranslationLayoutBinding
+    private lateinit var overlayFrameLayout: FrameLayout
 
     override fun onCreate() {
         super.onCreate()
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
-        translationLayoutBinding = TranslationLayoutBinding.inflate(LayoutInflater.from(this))
-        frameLayout = translationLayoutBinding.root
+        translationOverlayLayoutBinding = TranslationLayoutBinding.inflate(LayoutInflater.from(this))
+        overlayFrameLayout = translationOverlayLayoutBinding.root
     }
 
     private fun createParameters(x: Int, y: Int): WindowManager.LayoutParams {
@@ -42,12 +43,11 @@ class TranslateAccessibilityService : AccessibilityService() {
             0,
             0,
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT)
 
         params.x = x
         params.y = y
-        params.gravity = Gravity.CENTER or Gravity.CENTER
 
         params.width = WindowManager.LayoutParams.WRAP_CONTENT
         params.height = WindowManager.LayoutParams.WRAP_CONTENT
@@ -58,8 +58,8 @@ class TranslateAccessibilityService : AccessibilityService() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
 
-        if(frameLayout.isShown) {
-            windowManager.removeViewImmediate(frameLayout)
+        if(overlayFrameLayout.isShown) {
+            windowManager.removeViewImmediate(overlayFrameLayout)
         }
 
         runBlocking {
@@ -89,18 +89,15 @@ class TranslateAccessibilityService : AccessibilityService() {
                 )
             )
 
-            translationLayoutBinding.textTranslation.textSize = ParametersRepository
+            translationOverlayLayoutBinding.textTranslation.textSize = ParametersRepository
                 .getTranslationFrameTextSize(this@TranslateAccessibilityService) ?: 0f
 
             val backgroundColor = ParametersRepository.getFrameBackgroundColor(this@TranslateAccessibilityService) ?: 0
-            translationLayoutBinding.root.backgroundTintList = ColorStateList.valueOf(backgroundColor)
+            translationOverlayLayoutBinding.root.backgroundTintList = ColorStateList.valueOf(backgroundColor)
 
             val textColor = ParametersRepository.getFrameTextColor(this@TranslateAccessibilityService) ?: 0
-            translationLayoutBinding.textTranslation.setTextColor(textColor)
-
-            shape.paint.color = Color.BLUE
-            shape.paint.strokeWidth = 15f
-            frameLayout.background = shape
+            translationOverlayLayoutBinding.textTranslation.setTextColor(textColor)
+            overlayFrameLayout.background = shape
 
             val sourceLanguage = LanguagesRepository
                 .getSourceLanguageKey(this@TranslateAccessibilityService) ?: return@runBlocking
@@ -113,16 +110,14 @@ class TranslateAccessibilityService : AccessibilityService() {
             if(selectionStart >= selectionEnd)return@runBlocking
 
             val selectedText = source.text.substring(selectionStart, selectionEnd)
-            val xOffset = event.scrollX
-            val yOffset = event.scrollY
 
-            val params = createParameters(xOffset, yOffset)
+            val params = createParameters(xOverlayOffset, yOverlayOffset)
             translator.translate(selectedText).addOnSuccessListener {
-                translationLayoutBinding.textTranslation.text = it
-                windowManager.addView(frameLayout, params)
+                translationOverlayLayoutBinding.textTranslation.text = it
+                windowManager.addView(overlayFrameLayout, params)
             }
 
-            frameLayout.setOnTouchListener(object : View.OnTouchListener {
+            overlayFrameLayout.setOnTouchListener(object : View.OnTouchListener {
 
                 var x: Int = 0
                 var y: Int = 0
@@ -132,24 +127,23 @@ class TranslateAccessibilityService : AccessibilityService() {
                 val updatedParams = params
 
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-
                     event?.let {
                         when(it.action){
                             MotionEvent.ACTION_DOWN -> {
-
                                 x = updatedParams.x
                                 y = updatedParams.y
 
                                 touchedX = it.rawX
                                 touchedY = it.rawY
-
                             }
                             MotionEvent.ACTION_MOVE -> {
+                                xOverlayOffset = (x + it.rawX - touchedX).toInt()
+                                yOverlayOffset = (y + it.rawY - touchedY).toInt()
 
-                                updatedParams.x = (x + it.rawX - touchedX).toInt()
-                                updatedParams.y = (y + it.rawY - touchedY).toInt()
+                                updatedParams.x = xOverlayOffset
+                                updatedParams.y = yOverlayOffset
 
-                                windowManager.updateViewLayout(frameLayout, updatedParams)
+                                windowManager.updateViewLayout(overlayFrameLayout, updatedParams)
                             }
                         }
                     }
