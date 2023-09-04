@@ -28,7 +28,7 @@
             <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility" />
         </service>
 
-        <activity android:name="com.example.latranslator.MainActivity" android:exported="true">
+        <activity android:name="com.example.latranslator.MainActivity" android:screenOrientation="locked" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
