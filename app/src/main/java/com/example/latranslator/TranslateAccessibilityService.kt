@@ -2,6 +2,8 @@ package com.example.latranslator
 
 import android.accessibilityservice.AccessibilityService
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.res.ColorStateList
 import android.graphics.PixelFormat
 import android.graphics.drawable.ShapeDrawable
@@ -12,6 +14,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.widget.FrameLayout
+import android.widget.Toast
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
 import com.example.latranslator.data.repositories.ParametersRepository
@@ -21,6 +24,8 @@ import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class TranslateAccessibilityService : AccessibilityService() {
+
+    private var frameActionMovedFlag = false
 
     private var xOverlayOffset = 0
     private var yOverlayOffset = 0
@@ -35,6 +40,25 @@ class TranslateAccessibilityService : AccessibilityService() {
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         translationOverlayLayoutBinding = TranslationLayoutBinding.inflate(LayoutInflater.from(this))
         overlayFrameLayout = translationOverlayLayoutBinding.root
+
+        overlayFrameLayout.setOnClickListener {
+            if(!frameActionMovedFlag) {
+                windowManager.removeViewImmediate(overlayFrameLayout)
+            }
+        }
+
+        overlayFrameLayout.setOnLongClickListener {
+            if(!frameActionMovedFlag) {
+                val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val className = javaClass.name
+                val clip = ClipData.newPlainText(className, translationOverlayLayoutBinding.textTranslation.text)
+                clipboard.setPrimaryClip(clip)
+
+                Toast.makeText(this@TranslateAccessibilityService, R.string.text_copied, Toast.LENGTH_LONG).show()
+            }
+
+            true
+        }
     }
 
     private fun createParameters(x: Int, y: Int): WindowManager.LayoutParams {
@@ -137,13 +161,25 @@ class TranslateAccessibilityService : AccessibilityService() {
                                 touchedY = it.rawY
                             }
                             MotionEvent.ACTION_MOVE -> {
-                                xOverlayOffset = (x + it.rawX - touchedX).toInt()
-                                yOverlayOffset = (y + it.rawY - touchedY).toInt()
+
+                                val xNewPosition = (x + it.rawX - touchedX).toInt()
+                                val yNewPosition = (y + it.rawY - touchedY).toInt()
+
+                                if(xOverlayOffset + 3 == xNewPosition
+                                    || yOverlayOffset + 3 == yNewPosition) {
+                                    frameActionMovedFlag = true
+                                }
+
+                                xOverlayOffset = xNewPosition
+                                yOverlayOffset = yNewPosition
 
                                 updatedParams.x = xOverlayOffset
                                 updatedParams.y = yOverlayOffset
 
                                 windowManager.updateViewLayout(overlayFrameLayout, updatedParams)
+                            }
+                            MotionEvent.ACTION_UP -> {
+                                frameActionMovedFlag = false
                             }
                         }
                     }
