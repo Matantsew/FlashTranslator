@@ -10,6 +10,7 @@
     <string name="preview">Preview:</string>
     <string name="corner_radius">Corner radius:</string>
     <string name="text_size">Text size:</string>
+    <string name="search">Search:</string>
     <string name="background_color">Background color:</string>
     <string name="text_color">Text color:</string>
     <string name="open_accessibility">Open accessibility</string>
