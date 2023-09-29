@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.latranslator"
+        applicationId "com.mata.latranslator"
         minSdkVersion 30
         targetSdkVersion 33
         versionCode 1
