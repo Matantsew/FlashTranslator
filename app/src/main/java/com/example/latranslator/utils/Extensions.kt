@@ -1,11 +1,22 @@
 package com.example.latranslator.utils
 
 import android.content.Context
+import android.provider.Settings
 import android.view.View
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.latranslator.DATA_STORE_MAIN
+
+fun isAccessibilityTurnedOn(context: Context, accessibilityServiceClass: Class<*>): Boolean {
+
+    val prefString = Settings.Secure.getString(
+        context.contentResolver,
+        Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+    )
+
+    return prefString != null && prefString.contains(context.packageName + "/" + accessibilityServiceClass.name)
+}
 
 fun View.visible(v: Boolean) {
     visibility = if(v) View.VISIBLE else View.GONE
