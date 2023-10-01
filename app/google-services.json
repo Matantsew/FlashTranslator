@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "36595240652",
+    "project_id": "latranslator-597a9",
+    "storage_bucket": "latranslator-597a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36595240652:android:2ef807b753c6224140fc69",
+        "android_client_info": {
+          "package_name": "com.mata.latranslator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIZ68hRM-BOGaHvjAalGM6qbxpx308ul8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
