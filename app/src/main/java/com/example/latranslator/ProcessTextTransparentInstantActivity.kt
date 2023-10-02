@@ -13,7 +13,11 @@ class ProcessTextTransparentInstantActivity : Activity() {
             .getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)
 
         if(!text.isNullOrEmpty()) {
-            finishAndRemoveTask()
+            val instantTranslationServiceIntent = Intent(this, InstantTranslationService::class.java)
+            instantTranslationServiceIntent.putExtra(INTENT_EXTRA_PROCESS_TEXT, text.toString())
+            startService(instantTranslationServiceIntent)
         }
+
+        finishAndRemoveTask()
     }
 }
