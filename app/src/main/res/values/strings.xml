@@ -21,7 +21,7 @@
     <string name="accessibility_check_title">Check an accessibility permissions</string>
     <string name="turn_on_hint">Turn on the translator \nin accessibility service</string>
     <string name="accessibility_opening">Before start using a translator, please make sure you allowed an accessibility to use it</string>
-    <string name="first_version_released">First version released:</string>
+    <string name="first_version_released">First version released: 2023</string>
     <string name="email">e-mail: d.matantsew@gmail.com</string>
     <string name="to">To</string>
     <string name="cancel">Cancel</string>

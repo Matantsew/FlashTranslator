@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
                 val version = pInfo.versionName
 
                 val message = "${getText(R.string.version)} $version " +
-                        "\n${getText(R.string.first_version_released)} 2023"
+                        "\n${getText(R.string.first_version_released)}"
                         "\n${getText(R.string.email)}"
 
                 AlertDialog.Builder(this)

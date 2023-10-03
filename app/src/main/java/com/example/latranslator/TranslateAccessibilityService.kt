@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.res.ColorStateList
-import android.graphics.PixelFormat
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.view.LayoutInflater
@@ -19,6 +18,7 @@ import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
 import com.example.latranslator.data.repositories.ParametersRepository
 import com.example.latranslator.databinding.TranslationLayoutBinding
+import com.example.latranslator.utils.createLayoutParameters
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -62,24 +62,6 @@ class TranslateAccessibilityService : AccessibilityService() {
 
             true
         }
-    }
-
-    private fun createParameters(x: Int, y: Int): WindowManager.LayoutParams {
-
-        val params = WindowManager.LayoutParams(
-            0,
-            0,
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-            PixelFormat.TRANSLUCENT)
-
-        params.x = x
-        params.y = y
-
-        params.width = WindowManager.LayoutParams.WRAP_CONTENT
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT
-
-        return params
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -144,7 +126,7 @@ class TranslateAccessibilityService : AccessibilityService() {
 
             val selectedText = source.text.substring(selectionStart, selectionEnd)
 
-            val params = createParameters(xOverlayOffset, yOverlayOffset)
+            val params = createLayoutParameters(xOverlayOffset, yOverlayOffset)
             translator.translate(selectedText).addOnSuccessListener {
                 translationOverlayLayoutBinding.textTranslation.text = it
                 windowManager.addView(overlayFrameLayout, params)

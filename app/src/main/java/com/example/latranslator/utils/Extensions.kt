@@ -1,8 +1,10 @@
 package com.example.latranslator.utils
 
 import android.content.Context
+import android.graphics.PixelFormat
 import android.provider.Settings
 import android.view.View
+import android.view.WindowManager
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -26,6 +28,24 @@ fun View.visible(v: Boolean) {
 val Context.dataStoreMain: DataStore<Preferences> by preferencesDataStore(
     name = DATA_STORE_MAIN
 )
+
+fun createLayoutParameters(x: Int, y: Int): WindowManager.LayoutParams {
+
+    val params = WindowManager.LayoutParams(
+        0,
+        0,
+        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+        PixelFormat.TRANSLUCENT)
+
+    params.x = x
+    params.y = y
+
+    params.width = WindowManager.LayoutParams.WRAP_CONTENT
+    params.height = WindowManager.LayoutParams.WRAP_CONTENT
+
+    return params
+}
 
 fun String.convertLanguageKeyToName() =
     when(this) {
