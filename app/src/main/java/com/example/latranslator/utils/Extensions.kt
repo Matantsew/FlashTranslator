@@ -7,15 +7,16 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.latranslator.DATA_STORE_MAIN
+import com.example.latranslator.TranslateAccessibilityService
 
-fun isAccessibilityTurnedOn(context: Context, accessibilityServiceClass: Class<*>): Boolean {
+fun Context.isAccessibilityTurnedOn(): Boolean {
 
     val prefString = Settings.Secure.getString(
-        context.contentResolver,
+        contentResolver,
         Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
     )
 
-    return prefString != null && prefString.contains(context.packageName + "/" + accessibilityServiceClass.name)
+    return prefString != null && prefString.contains(packageName + "/" + TranslateAccessibilityService::class.java.name)
 }
 
 fun View.visible(v: Boolean) {

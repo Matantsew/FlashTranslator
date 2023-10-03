@@ -20,6 +20,9 @@ import com.example.latranslator.data.repositories.LanguagesRepository
 import com.example.latranslator.data.repositories.ParametersRepository
 import com.example.latranslator.databinding.TranslationLayoutBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
@@ -88,6 +91,12 @@ class TranslateAccessibilityService : AccessibilityService() {
 
         runBlocking {
 
+            xOverlayOffset = ParametersRepository
+                .getTranslationFrameCurrentOffsetX(this@TranslateAccessibilityService) ?: 0
+
+            yOverlayOffset = ParametersRepository
+                .getTranslationFrameCurrentOffsetY(this@TranslateAccessibilityService) ?: 0
+
             val source = event.source
 
             val selectionStart = source?.textSelectionStart ?: return@runBlocking
@@ -114,12 +123,12 @@ class TranslateAccessibilityService : AccessibilityService() {
             )
 
             translationOverlayLayoutBinding.textTranslation.textSize = ParametersRepository
-                .getTranslationFrameTextSize(this@TranslateAccessibilityService) ?: 0f
+                .getTranslationFrameTextSize(this@TranslateAccessibilityService) ?: 24.0f
 
-            val backgroundColor = ParametersRepository.getFrameBackgroundColor(this@TranslateAccessibilityService) ?: 0
+            val backgroundColor = ParametersRepository.getFrameBackgroundColor(this@TranslateAccessibilityService) ?: -4203791
             translationOverlayLayoutBinding.root.backgroundTintList = ColorStateList.valueOf(backgroundColor)
 
-            val textColor = ParametersRepository.getFrameTextColor(this@TranslateAccessibilityService) ?: 0
+            val textColor = ParametersRepository.getFrameTextColor(this@TranslateAccessibilityService) ?: -12961222
             translationOverlayLayoutBinding.textTranslation.setTextColor(textColor)
             overlayFrameLayout.background = shape
 
@@ -152,7 +161,7 @@ class TranslateAccessibilityService : AccessibilityService() {
 
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     event?.let {
-                        when(it.action){
+                        when(it.action) {
                             MotionEvent.ACTION_DOWN -> {
                                 x = updatedParams.x
                                 y = updatedParams.y
@@ -180,7 +189,12 @@ class TranslateAccessibilityService : AccessibilityService() {
                             }
                             MotionEvent.ACTION_UP -> {
                                 frameActionMovedFlag = false
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    ParametersRepository.setTranslationFrameCurrentOffsetX(this@TranslateAccessibilityService, xOverlayOffset)
+                                    ParametersRepository.setTranslationFrameCurrentOffsetY(this@TranslateAccessibilityService, yOverlayOffset)
+                                }
                             }
+                            else -> {}
                         }
                     }
 

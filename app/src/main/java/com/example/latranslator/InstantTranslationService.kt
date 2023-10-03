@@ -20,7 +20,12 @@ import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
 import com.example.latranslator.data.repositories.ParametersRepository
 import com.example.latranslator.databinding.TranslationLayoutBinding
+import com.example.latranslator.utils.isAccessibilityTurnedOn
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.system.exitProcess
 
 class InstantTranslationService : Service() {
 
@@ -49,6 +54,14 @@ class InstantTranslationService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            xOverlayOffset = ParametersRepository
+                .getTranslationFrameCurrentOffsetX(this@InstantTranslationService) ?: 0
+
+            yOverlayOffset = ParametersRepository
+                .getTranslationFrameCurrentOffsetY(this@InstantTranslationService) ?: 0
+        }
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         translationOverlayLayoutBinding = TranslationLayoutBinding.inflate(LayoutInflater.from(this))
@@ -79,7 +92,6 @@ class InstantTranslationService : Service() {
         return null
     }
 
-
     @SuppressLint("ClickableViewAccessibility")
     private suspend fun onShowTranslationFrame(selectedText: String) {
 
@@ -102,12 +114,12 @@ class InstantTranslationService : Service() {
         )
 
         translationOverlayLayoutBinding.textTranslation.textSize = ParametersRepository
-            .getTranslationFrameTextSize(this@InstantTranslationService) ?: 0f
+            .getTranslationFrameTextSize(this@InstantTranslationService) ?: 24.0f
 
-        val backgroundColor = ParametersRepository.getFrameBackgroundColor(this@InstantTranslationService) ?: 0
+        val backgroundColor = ParametersRepository.getFrameBackgroundColor(this@InstantTranslationService) ?: -4203791
         translationOverlayLayoutBinding.root.backgroundTintList = ColorStateList.valueOf(backgroundColor)
 
-        val textColor = ParametersRepository.getFrameTextColor(this@InstantTranslationService) ?: 0
+        val textColor = ParametersRepository.getFrameTextColor(this@InstantTranslationService) ?: -12961222
         translationOverlayLayoutBinding.textTranslation.setTextColor(textColor)
         overlayFrameLayout.background = shape
 
@@ -136,7 +148,7 @@ class InstantTranslationService : Service() {
 
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 event?.let {
-                    when(it.action){
+                    when(it.action) {
                         MotionEvent.ACTION_DOWN -> {
                             x = updatedParams.x
                             y = updatedParams.y
@@ -164,7 +176,12 @@ class InstantTranslationService : Service() {
                         }
                         MotionEvent.ACTION_UP -> {
                             frameActionMovedFlag = false
+                            CoroutineScope(Dispatchers.IO).launch {
+                                ParametersRepository.setTranslationFrameCurrentOffsetX(this@InstantTranslationService, xOverlayOffset)
+                                ParametersRepository.setTranslationFrameCurrentOffsetY(this@InstantTranslationService, yOverlayOffset)
+                            }
                         }
+                        else -> {}
                     }
                 }
 
@@ -193,7 +210,8 @@ class InstantTranslationService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-
-
+        if(!isAccessibilityTurnedOn()) {
+            exitProcess(0)
+        }
     }
 }

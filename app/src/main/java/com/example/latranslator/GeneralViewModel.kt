@@ -84,12 +84,12 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
         }
 
         viewModelScope.launch(Dispatchers.Main) {
-            val color = ParametersRepository.getFrameBackgroundColor(context) ?: 0
+            val color = ParametersRepository.getFrameBackgroundColor(context) ?: -4203791
             _frameBackgroundColor.value = color
         }
 
         viewModelScope.launch(Dispatchers.Main) {
-            val color = ParametersRepository.getFrameTextColor(context) ?: 0
+            val color = ParametersRepository.getFrameTextColor(context) ?: -12961222
             _frameTextColor.value = color
         }
 
@@ -98,8 +98,7 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
     fun checkAccessibilityTurnedOn(context: Context) {
         viewModelScope.launch {
-            _accessibilityTurnedOn.value = isAccessibilityTurnedOn(context,
-                TranslateAccessibilityService::class.java)
+            _accessibilityTurnedOn.value = context.isAccessibilityTurnedOn()
         }
     }
 
@@ -188,7 +187,7 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
     fun obtainTranslationFrameTextSize(context: Context) {
         viewModelScope.launch(Dispatchers.Main) {
-            _frameTextSize.value = ParametersRepository.getTranslationFrameTextSize(context) ?: 0f
+            _frameTextSize.value = ParametersRepository.getTranslationFrameTextSize(context) ?: 24.0f
         }
     }
 
