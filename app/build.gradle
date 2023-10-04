@@ -6,6 +6,15 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        releaseConf {
+            keyAlias "latranslator"
+            keyPassword "cdasfvnta12`a31acl"
+            storePassword "cdasfvnta12`a31acl"
+            storeFile file("../../LaTranslator/keystore.jks")
+        }
+    }
+
     compileSdk 33
     buildToolsVersion "30.0.3"
 
@@ -25,7 +34,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.releaseConf
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
