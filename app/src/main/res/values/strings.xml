@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">La Translator</string>
+    <string name="app_name" translatable="false">La Translator</string>
     <string name="translator">Translator</string>
     <string name="languages">Languages</string>
     <string name="settings">Settings</string>
@@ -17,7 +17,6 @@
     <string name="about">About</string>
     <string name="from">From</string>
     <string name="swap">Swap</string>
-    <string name="turn_on_content_description">Translator will be constantly launched</string>
     <string name="accessibility_check_title">Check an accessibility permissions</string>
     <string name="turn_on_hint">Turn on the translator \nin accessibility service</string>
     <string name="accessibility_opening">Before start using a translator, please make sure you allowed an accessibility to use it</string>
