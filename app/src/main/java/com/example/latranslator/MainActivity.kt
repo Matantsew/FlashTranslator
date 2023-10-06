@@ -3,6 +3,7 @@ package com.example.latranslator
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageInfo
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        this.createConfigurationContext(this.resources.configuration)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
