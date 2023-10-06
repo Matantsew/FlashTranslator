@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">Người dịch</string>
+    <string name="languages">Ngôn ngữ</string>
+    <string name="settings">Cài đặt</string>
+    <string name="translation">Bản dịch</string>
+    <string name="text_copied">Đã sao chép văn bản!</string>
+    <string name="activate">Kích hoạt</string>
+    <string name="deactivate">Tắt</string>
+    <string name="preview">Xem trước:</string>
+    <string name="corner_radius">Bán kính góc:</string>
+    <string name="text_size">Kích thước văn bản:</string>
+    <string name="search">Tìm kiếm:</string>
+    <string name="background_color">Màu nền:</string>
+    <string name="text_color">Màu văn bản:</string>
+    <string name="open_accessibility">Mở cài đặt trợ năng</string>
+    <string name="about">Về ứng dụng</string>
+    <string name="from">Từ</string>
+    <string name="swap">Hoán đổi</string>
+    <string name="accessibility_check_dialog_title">Kiểm tra khả năng tiếp cận</string>
+    <string name="activate_hint">Kích hoạt trình dịch trong dịch vụ trợ năng</string>
+    <string name="accessibility_opening_dialog_description">Trước khi bắt đầu sử dụng trình dịch, vui lòng đảm bảo rằng bạn đã cho phép khả năng truy cập để sử dụng nó</string>
+    <string name="first_version_released">Phiên bản đầu tiên được phát hành: 2023</string>
+    <string name="to">Tới</string>
+    <string name="cancel">Hủy</string>
+    <string name="continue_">Tiếp tục</string>
+    <string name="version">Phiên bản:</string>
+</resources>
