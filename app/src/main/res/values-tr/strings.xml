@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">Çevirmen</string>
+    <string name="languages">Diller</string>
+    <string name="settings">Ayarlar</string>
+    <string name="translation">Çeviri</string>
+    <string name="text_copied">Metin kopyalandı!</string>
+    <string name="activate">Etkinleştir</string>
+    <string name="deactivate">Devre Dışı Bırak</string>
+    <string name="preview">Önizleme:</string>
+    <string name="corner_radius">Köşe yarıçapı:</string>
+    <string name="text_size">Metin boyutu:</string>
+    <string name="search">Arama:</string>
+    <string name="background_color">Arka plan rengi:</string>
+    <string name="text_color">Metin rengi:</string>
+    <string name="open_accessibility">Erişilebilirlik ayarlarını aç</string>
+    <string name="about">Hakkında</string>
+    <string name="from">Dilden tercüme et</string>
+    <string name="swap">Değiştir</string>
+    <string name="accessibility_check_dialog_title">Erişilebilirlik izinlerini kontrol edin</string>
+    <string name="activate_hint">Erişilebilirlik Hizmetlerinde Çevirmen`i Etkinleştirin</string>
+    <string name="accessibility_opening_dialog_description">Bir çevirmeni kullanmaya başlamadan önce, lütfen onu kullanmak için bir erişilebilirliğe izin verdiğinizden emin olun</string>
+    <string name="first_version_released">Yayınlanan ilk sürüm: 2023</string>
+    <string name="to">Dile çevir</string>
+    <string name="cancel">İptal</string>
+    <string name="continue_">Devam et</string>
+    <string name="version">Sürüm:</string>
+</resources>
