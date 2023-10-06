@@ -23,7 +23,8 @@
     <string name="accessibility_opening_dialog_description">Aby włączyć tłumacz, upewnij się, że włączyłeś go w ustawieniach dostępnośći</string>
     <string name="first_version_released">Pierwsza wersja wydana w 2023 roku</string>
     <string name="to">Na</string>
-    <string name="cancel">Zamknąć</string>
+    <string name="cancel">Anulować</string>
     <string name="version">Wersja:</string>
+    <string name="continue_">Kontynuować</string>
 
 </resources>

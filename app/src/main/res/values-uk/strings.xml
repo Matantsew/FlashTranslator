@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">La Translator</string>
+    <string name="translator">Перекладач</string>
+    <string name="languages">Мови</string>
+    <string name="settings">Налаштування</string>
+    <string name="translation">Переклад</string>
+    <string name="text_copied">Текст скопійовано!</string>
+    <string name="turn_on">Увімкнути</string>
+    <string name="turn_off">Вимкнути</string>
+    <string name="preview">Попередній перегляд:</string>
+    <string name="corner_radius">Радіус кута:</string>
+    <string name="text_size">Розмір тексту:</string>
+    <string name="search">Пошук:</string>
+    <string name="background_color">Колір фону:</string>
+    <string name="text_color">Колір тексту:</string>
+    <string name="open_accessibility">Відкрити налаштування спеціальних можливостей</string>
+    <string name="about">Про додаток</string>
+    <string name="from">З</string>
+    <string name="swap">Переставити місцями</string>
+    <string name="accessibility_check_dialog_title">Перевірте налаштування спеціальних можливостей</string>
+    <string name="turn_on_hint">Увімкніть перекладач \nу службі спеціальних можливостей</string>
+    <string name="accessibility_opening_dialog_description">Щоб почати використовувати перекладач, переконайтеся, що ви дозволили доступ до нього у службі спеціальних можливостей</string>
+    <string name="first_version_released">Перша версія випущена у: 2023</string>
+    <string name="to">На</string>
+    <string name="cancel">Скасувати</string>
+    <string name="version">Версія:</string>
+    <string name="continue_">Продовжити</string>
+</resources>

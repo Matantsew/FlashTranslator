@@ -109,7 +109,7 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
                 R.string.accessibility_opening_dialog_description
             )
             .setNegativeButton(R.string.cancel, null)
-            .setPositiveButton(R.string.ok,
+            .setPositiveButton(R.string.continue_,
             ) { _, _ -> openAccessibilitySettings(context) }
             .show()
     }

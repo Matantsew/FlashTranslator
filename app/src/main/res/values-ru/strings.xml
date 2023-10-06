@@ -25,5 +25,6 @@
     <string name="to">На</string>
     <string name="cancel">Отмена</string>
     <string name="version">Версия:</string>
+    <string name="continue_">Продолжить</string>
 
 </resources>

@@ -25,5 +25,6 @@
     <string name="to">To</string>
     <string name="cancel">Cancel</string>
     <string name="ok" translatable="false">OK</string>
+    <string name="continue_">Continue</string>
     <string name="version">Version:</string>
 </resources>
