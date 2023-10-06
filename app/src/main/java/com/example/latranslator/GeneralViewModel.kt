@@ -104,9 +104,9 @@ class GeneralViewModel @Inject internal constructor(@ApplicationContext context:
 
     fun showAccessibilityAlertDialog(context: Context) {
         AlertDialog.Builder(context)
-            .setTitle(R.string.accessibility_check_title)
+            .setTitle(R.string.accessibility_check_dialog_title)
             .setMessage(
-                R.string.accessibility_opening
+                R.string.accessibility_opening_dialog_description
             )
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.ok,

@@ -17,9 +17,9 @@
     <string name="about">About</string>
     <string name="from">From</string>
     <string name="swap">Swap</string>
-    <string name="accessibility_check_title">Check an accessibility permissions</string>
+    <string name="accessibility_check_dialog_title">Check an accessibility permissions</string>
     <string name="turn_on_hint">Turn on the translator \nin accessibility service</string>
-    <string name="accessibility_opening">Before start using a translator, please make sure you allowed an accessibility to use it</string>
+    <string name="accessibility_opening_dialog_description">Before start using a translator, please make sure you allowed an accessibility to use it</string>
     <string name="first_version_released">First version released: 2023</string>
     <string name="email" translatable="false">e-mail: d.matantsew@gmail.com</string>
     <string name="to">To</string>
