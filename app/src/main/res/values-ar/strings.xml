@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">المترجم</string>
+    <string name="languages">اللغات</string>
+    <string name="settings">الإعدادات</string>
+    <string name="translation">الترجمة</string>
+    <string name="text_copied">تم نسخ النص!</string>
+    <string name="activate">التنشيط</string>
+    <string name="deactivate">إلغاء التنشيط</string>
+    <string name="preview">المعاينة:</string>
+    <string name="corner_radius">نصف قطر الزاوية:</string>
+    <string name="text_size">حجم النص:</string>
+    <string name="search">البحث:</string>
+    <string name="background_color">لون الخلفية:</string>
+    <string name="text_color">لون النص:</string>
+    <string name="open_accessibility">افتح إعدادات إمكانية الوصول</string>
+    <string name="about">حول</string>
+    <string name="from">من</string>
+    <string name="swap">مبادلة</string>
+    <string name="accessibility_check_dialog_title">تحقق من أذونات إمكانية الوصول</string>
+    <string name="activate_hint">تنشيط المترجم \nفي خدمة إمكانية الوصول</string>
+    <string name="accessibility_opening_dialog_description">قبل البدء في استخدام المترجم، يرجى التأكد من السماح بإمكانية الوصول لاستخدامه</string>
+    <string name="first_version_released">تم إصدار الإصدار الأول: 2023</string>
+    <string name="to">إلى</string>
+    <string name="cancel">إلغاء</string>
+    <string name="continue_">متابعة</string>
+    <string name="version">الإصدار:</string>
+</resources>
