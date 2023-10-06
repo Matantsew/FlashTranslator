@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">La Translator</string>
     <string name="translator">Перекладач</string>
     <string name="languages">Мови</string>
     <string name="settings">Налаштування</string>
