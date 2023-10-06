@@ -4,8 +4,8 @@
     <string name="settings">Einstellungen</string>
     <string name="translation">Übersetzung</string>
     <string name="text_copied">Text kopiert!</string>
-    <string name="turn_on">Einschalten</string>
-    <string name="turn_off">Ausschalten</string>
+    <string name="activate">Aktivieren</string>
+    <string name="deactivate">Deaktivieren</string>
     <string name="preview">Vorschau:</string>
     <string name="corner_radius">Eckenradius:</string>
     <string name="text_size">Textgröße:</string>
@@ -17,7 +17,7 @@
     <string name="from">Von</string>
     <string name="swap">Tausch</string>
     <string name="accessibility_check_dialog_title">Zugriffsberechtigungen prüfen</string>
-    <string name="turn_on_hint">Aktivieren Sie den Übersetzer-\nin-Eingabehilfedienst</string>
+    <string name="activate_hint">Aktivieren Sie den Übersetzer-\nin-Eingabehilfedienst</string>
     <string name="accessibility_opening_dialog_description">Bevor Sie einen Übersetzer verwenden, stellen Sie bitte sicher, dass Sie eine Barrierefreiheit für die Verwendung zugelassen haben</string>
     <string name="first_version_released">Erste Version veröffentlicht: 2023</string>
     <string name="to">An</string>

@@ -99,7 +99,7 @@
             android:textColor="@color/gray"
             android:textSize="@dimen/turn_on_hint_text_size"
             android:gravity="center"
-            android:text="@string/turn_on_hint"/>
+            android:text="@string/activate_hint"/>
 
         <Button
             android:id="@+id/open_accessibility_button"
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/gray_sea"
             android:layout_marginTop="5dp"
-            android:text="@string/turn_on"
+            android:text="@string/activate"
             android:layout_gravity="center"/>
 
     </LinearLayout>

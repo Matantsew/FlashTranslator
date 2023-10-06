@@ -5,8 +5,8 @@
     <string name="settings">Налаштування</string>
     <string name="translation">Переклад</string>
     <string name="text_copied">Текст скопійовано!</string>
-    <string name="turn_on">Увімкнути</string>
-    <string name="turn_off">Вимкнути</string>
+    <string name="activate">Активувати</string>
+    <string name="deactivate">Деактивувати</string>
     <string name="preview">Попередній перегляд:</string>
     <string name="corner_radius">Радіус кута:</string>
     <string name="text_size">Розмір тексту:</string>
@@ -18,7 +18,7 @@
     <string name="from">З</string>
     <string name="swap">Переставити місцями</string>
     <string name="accessibility_check_dialog_title">Перевірте налаштування спеціальних можливостей</string>
-    <string name="turn_on_hint">Увімкніть перекладач \nу службі спеціальних можливостей</string>
+    <string name="activate_hint">Увімкніть перекладач \nу службі спеціальних можливостей</string>
     <string name="accessibility_opening_dialog_description">Щоб почати використовувати перекладач, переконайтеся, що ви дозволили доступ до нього у службі спеціальних можливостей</string>
     <string name="first_version_released">Перша версія випущена у: 2023</string>
     <string name="to">На</string>

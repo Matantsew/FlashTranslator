@@ -45,11 +45,11 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
         lifecycleScope.launchWhenCreated {
             viewModel.accessibilityTurnedOn.collect { turnedOn ->
                 if (turnedOn) {
-                    binding.openAccessibilityButton.text = requireContext().getText(R.string.turn_off)
+                    binding.openAccessibilityButton.text = requireContext().getText(R.string.deactivate)
                     binding.openAccessibilityButton.backgroundTintList = ColorStateList.valueOf(requireContext().getColor(R.color.gray))
                 }
                 else {
-                    binding.openAccessibilityButton.text = requireContext().getText(R.string.turn_on)
+                    binding.openAccessibilityButton.text = requireContext().getText(R.string.activate)
                     binding.openAccessibilityButton.backgroundTintList = ColorStateList.valueOf(requireContext().getColor(R.color.gray_sea))
                 }
             }

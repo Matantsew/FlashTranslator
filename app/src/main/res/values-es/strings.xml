@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">Traductor</string>
+    <string name="languages">Idiomas</string>
+    <string name="settings">Configuración</string>
+    <string name="translation">Traducción</string>
+    <string name="text_copied">¡Texto copiado!</string>
+    <string name="activate">Activar</string>
+    <string name="deactivate">Desactivar</string>
+    <string name="preview">Vista previa:</string>
+    <string name="corner_radius">Radio de la esquina:</string>
+    <string name="text_size">Tamaño del texto:</string>
+    <string name="search">Buscar:</string>
+    <string name="background_color">Color de fondo:</string>
+    <string name="text_color">Color del texto:</string>
+    <string name="open_accessibility">Abrir configuración de accesibilidad</string>
+    <string name="about">Acerca de</string>
+    <string name="from">De</string>
+    <string name="swap">Intercambiar</string>
+    <string name="accessibility_check_dialog_title">Comprueba los permisos de accesibilidad</string>
+    <string name="activate_hint">Activar el traductor \nen el servicio de accesibilidad</string>
+    <string name="accessibility_opening_dialog_description">Antes de comenzar a usar un traductor, asegúrese de haber permitido la accesibilidad para usarlo</string>
+    <string name="first_version_released">Primera versión lanzada: 2023</string>
+    <string name="to">Para</string>
+    <string name="cancel">Cancelar</string>
+    <string name="continue_">Continuar</string>
+    <string name="version">Versión:</string>
+</resources>

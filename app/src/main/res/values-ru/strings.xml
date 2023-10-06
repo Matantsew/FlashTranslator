@@ -5,8 +5,8 @@
     <string name="settings">Настройки</string>
     <string name="translation">Перевод</string>
     <string name="text_copied">Текст скопирован!</string>
-    <string name="turn_on">Включить</string>
-    <string name="turn_off">Выключить</string>
+    <string name="activate">Активировать</string>
+    <string name="deactivate">Деактивировать</string>
     <string name="preview">Просмотр:</string>
     <string name="corner_radius">Угловой радиус:</string>
     <string name="text_size">Размер текста:</string>
@@ -18,7 +18,7 @@
     <string name="from">С</string>
     <string name="swap">Переставить местами</string>
     <string name="accessibility_check_dialog_title">Проверьте настройки специальных возможностей</string>
-    <string name="turn_on_hint">Включите переводчик \nв службе специальных возможностей</string>
+    <string name="activate_hint">Включите переводчик \nв службе специальных возможностей</string>
     <string name="accessibility_opening_dialog_description">Чтобы включить переводчик, дайте разрешение службе специальных возможностей его использовать.</string>
     <string name="first_version_released">Первая версия выпущена в: 2023</string>
     <string name="to">На</string>
