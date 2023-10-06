@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">La Translator</string>
+    <string name="translator">Tłumacz</string>
+    <string name="languages">Języki</string>
+    <string name="settings">Ustawienia</string>
+    <string name="translation">Tłumaczenie</string>
+    <string name="text_copied">Tekst skopiowany!</string>
+    <string name="turn_on">Włączyć</string>
+    <string name="turn_off">Wyłączyć</string>
+    <string name="preview">Przegląd:</string>
+    <string name="corner_radius">Promień narożnika:</string>
+    <string name="text_size">Rozmiar czcionki:</string>
+    <string name="search">Szukaj:</string>
+    <string name="background_color">Kolor tła:</string>
+    <string name="text_color">Kolor tekstu:</string>
+    <string name="open_accessibility">Otwórz funkcje dostępności</string>
+    <string name="about">O aplikacji</string>
+    <string name="from">Z</string>
+    <string name="swap">Przemienić</string>
+    <string name="accessibility_check_title">Sprawdź uprawnienia dostępności</string>
+    <string name="turn_on_hint">Włącz tłumacz \nw usłudze dostępności</string>
+    <string name="accessibility_opening">Przed korzystaniem z tłumacza, upewnij się, że włączyłeś ustawienia dostępnośći</string>
+    <string name="first_version_released">Pierwsza wersja wydana w 2023 roku</string>
+    <string name="to">Na</string>
+    <string name="cancel">Zamknąć</string>
+    <string name="version">Wersja:</string>
+
+</resources>
