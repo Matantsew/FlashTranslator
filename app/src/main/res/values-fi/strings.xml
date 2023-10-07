@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">Kääntäjä</string>
+    <string name="languages">Kielet</string>
+    <string name="settings">Asetukset</string>
+    <string name="translation">Käännös</string>
+    <string name="text_copied">Teksti kopioitu!</string>
+    <string name="activate">Aktivoi</string>
+    <string name="deactivate">Poista käytöstä</string>
+    <string name="preview">Esikatselu:</string>
+    <string name="corner_radius">Kulman säde:</string>
+    <string name="text_size">Tekstin koko:</string>
+    <string name="search">Haku:</string>
+    <string name="background_color">Taustaväri:</string>
+    <string name="text_color">Tekstin väri:</string>
+    <string name="open_accessibility">Avaa esteettömyysasetukset</string>
+    <string name="about">Tietoja</string>
+    <string name="from">Kääntää kielestä</string>
+    <string name="swap">Vaihda</string>
+    <string name="accessibility_check_dialog_title">Tarkista esteettömyyden käyttöoikeudet</string>
+    <string name="activate_hint">Aktivoi kääntäjä \nesteettömyyspalvelussa</string>
+    <string name="accessibility_opening_dialog_description">Ennen kuin alat käyttää kääntäjää, varmista, että olet sallinut esteettömyystoiminnon käyttää sitä</string>
+    <string name="first_version_released">Ensimmäinen versio julkaistu: 2023</string>
+    <string name="to">Kääntää kielelle</string>
+    <string name="cancel">Peruuta</string>
+    <string name="continue_">Jatka</string>
+    <string name="version">Versio:</string>
+</resources>
