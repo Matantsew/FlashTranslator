@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">翻訳者</string>
+    <string name="languages">言語</string>
+    <string name="settings">設定</string>
+    <string name="translation">翻訳</string>
+    <string name="text_copied">テキストがコピーされました!</string>
+    <string name="activate">アクティブ化</string>
+    <string name="deactivate">非アクティブ化</string>
+    <string name="preview">プレビュー:</string>
+    <string name="corner_radius">コーナー半径:</string>
+    <string name="text_size">テキストサイズ:</string>
+    <string name="search">検索:</string>
+    <string name="background_color">背景色:</string>
+    <string name="text_color">テキストの色:</string>
+    <string name="open_accessibility">アクセシビリティ設定を開く</string>
+    <string name="about">について</string>
+    <string name="from">差出人</string>
+    <string name="swap">スワップ</string>
+    <string name="accessibility_check_dialog_title">アクセシビリティ権限を確認する</string>
+    <string name="activate_hint">アクセシビリティサービスでトランスレータをアクティブ化する</string>
+    <string name="accessibility_opening_dialog_description">翻訳ツールの使用を開始する前に、その翻訳ツールの使用がアクセシビリティに許可されていることを確認してください</string>
+    <string name="first_version_released">最初のバージョンのリリース: 2023 年</string>
+    <string name="to">宛先</string>
+    <string name="cancel">キャンセル</string>
+    <string name="continue_">続行</string>
+    <string name="version">バージョン:</string>
+</resources>
