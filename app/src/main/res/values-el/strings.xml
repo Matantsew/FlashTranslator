@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">Μεταφραστής</string>
+    <string name="languages">Γλώσσες</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="translation">Μετάφραση</string>
+    <string name="text_copied">Το κείμενο αντιγράφηκε!</string>
+    <string name="activate">Ενεργοποίηση</string>
+    <string name="deactivate">Απενεργοποίηση</string>
+    <string name="preview">Προεπισκόπηση:</string>
+    <string name="corner_radius">Ακτίνα γωνίας:</string>
+    <string name="text_size">Μέγεθος κειμένου:</string>
+    <string name="search">Αναζήτηση:</string>
+    <string name="background_color">Χρώμα φόντου:</string>
+    <string name="text_color">Χρώμα κειμένου:</string>
+    <string name="open_accessibility">Ανοίξτε τις ρυθμίσεις προσβασιμότητας</string>
+    <string name="about">Σχετικά με</string>
+    <string name="from">Από</string>
+    <string name="swap">Ανταλλαγή</string>
+    <string name="accessibility_check_dialog_title">Ελέγξτε τις άδειες προσβασιμότητας</string>
+    <string name="activate_hint">Ενεργοποίηση του μεταφραστή \nin υπηρεσία προσβασιμότητας</string>
+    <string name="accessibility_opening_dialog_description">Πριν αρχίσετε να χρησιμοποιείτε έναν μεταφραστή, βεβαιωθείτε ότι έχετε επιτρέψει σε μια προσβασιμότητα να τον χρησιμοποιήσει</string>
+    <string name="first_version_released">Πρώτη έκδοση που κυκλοφόρησε: 2023</string>
+    <string name="to">Προς</string>
+    <string name="cancel">Ακύρωση</string>
+    <string name="continue_">Συνέχεια</string>
+    <string name="version">Έκδοση:</string>
+</resources>
