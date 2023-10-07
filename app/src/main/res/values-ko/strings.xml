@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">번역가</string>
+    <string name="languages">언어</string>
+    <string name="settings">설정</string>
+    <string name="translation">번역</string>
+    <string name="text_copied">텍스트가 복사되었습니다!</string>
+    <string name="activate">활성화</string>
+    <string name="deactivate">비활성화</string>
+    <string name="preview">미리보기:</string>
+    <string name="corner_radius">모서리 반경:</string>
+    <string name="text_size">텍스트 크기:</string>
+    <string name="search">검색:</string>
+    <string name="background_color">배경 색상:</string>
+    <string name="text_color">텍스트 색상:</string>
+    <string name="open_accessibility">접근성 설정 열기</string>
+    <string name="about">정보</string>
+    <string name="from">보낸 사람</string>
+    <string name="swap">교환</string>
+    <string name="accessibility_check_dialog_title">접근성 권한 확인</string>
+    <string name="activate_hint">접근성 서비스에서 번역기 활성화</string>
+    <string name="accessibility_opening_dialog_description">번역기를 사용하기 전에 번역기 사용에 대한 접근성을 허용했는지 확인하세요</string>
+    <string name="first_version_released">첫 번째 버전 출시: 2023</string>
+    <string name="to">받는 사람</string>
+    <string name="cancel">취소</string>
+    <string name="continue_">계속</string>
+    <string name="version">버전:</string>
+</resources>
