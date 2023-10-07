@@ -1,0 +1,27 @@
+<resources>
+    <string name="translator">Oversetter</string>
+    <string name="languages">Språkene</string>
+    <string name="settings">Innstillinger</string>
+    <string name="translation">Oversettelse</string>
+    <string name="text_copied">Tekst kopiert!</string>
+    <string name="activate">Aktiver</string>
+    <string name="deactivate">Deaktiver</string>
+    <string name="preview">Forhåndsvisning:</string>
+    <string name="corner_radius">Hjørneradius:</string>
+    <string name="text_size">Tekststørrelse:</string>
+    <string name="search">Søk:</string>
+    <string name="background_color">Bakgrunnsfarge:</string>
+    <string name="text_color">Tekstfarge:</string>
+    <string name="open_accessibility">Åpne tilgjengelighetsinnstillinger</string>
+    <string name="about">Om</string>
+    <string name="from">Fra</string>
+    <string name="swap">Bytt</string>
+    <string name="accessibility_check_dialog_title">Sjekk en tilgjengelighetstillatelse</string>
+    <string name="activate_hint">Aktiver oversetteren \ni tilgjengelighetstjenesten</string>
+    <string name="accessibility_opening_dialog_description">Før du begynner å bruke en oversetter, sørg for at du har tillatt en tilgjengelighet for å bruke den</string>
+    <string name="first_version_released">Første versjon utgitt: 2023</string>
+    <string name="to">Til</string>
+    <string name="cancel">Avbryt</string>
+    <string name="continue_">Fortsett</string>
+    <string name="version">Versjon:</string>
+</resources>
