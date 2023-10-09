@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.LaTranslator" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/deep_gray_blue</item>
-        <item name="colorPrimaryVariant">@color/gray_sea</item>
+        <item name="colorPrimary">@color/deep_gray</item>
+        <item name="colorPrimaryVariant">@color/gray_light</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/light_coast</item>

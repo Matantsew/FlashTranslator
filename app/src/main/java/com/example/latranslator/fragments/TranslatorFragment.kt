@@ -50,7 +50,7 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
                 else {
                     binding.openAccessibilityButton.text = requireContext().getText(R.string.activate)
-                    binding.openAccessibilityButton.backgroundTintList = ColorStateList.valueOf(requireContext().getColor(R.color.gray_sea))
+                    binding.openAccessibilityButton.backgroundTintList = ColorStateList.valueOf(requireContext().getColor(R.color.gray_light))
                 }
             }
         }

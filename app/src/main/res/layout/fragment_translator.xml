@@ -36,7 +36,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:textAlignment="textStart"
-            android:background="@color/light_gray"
+            android:background="@color/background_contrast"
             android:hint="@string/languages"
             app:layout_constraintTop_toBottomOf="@+id/tv_from"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -79,7 +79,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
-            android:background="@color/light_gray"
+            android:background="@color/background_contrast"
             android:textAlignment="textStart"
             android:hint="@string/languages"
             app:layout_constraintTop_toBottomOf="@+id/tv_to"
@@ -105,7 +105,7 @@
             android:id="@+id/open_accessibility_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray_sea"
+            android:backgroundTint="@color/gray_light"
             android:layout_marginTop="5dp"
             android:text="@string/activate"
             android:layout_gravity="center"/>

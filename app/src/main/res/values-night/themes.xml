@@ -1,16 +1,30 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.LaTranslator" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.LaTranslator" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/bright_coast</item>
-        <item name="colorPrimaryVariant">@color/gray_sea</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/deep_gray</item>
+        <item name="colorPrimaryVariant">@color/deep_gray</item>
+        <item name="colorOnPrimary">@color/deep_gray</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_coast</item>
-        <item name="colorSecondaryVariant">@color/light_coast</item>
+        <item name="colorSecondary">@color/blue_sea</item>
+        <item name="colorSecondaryVariant">@color/main_gray</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="splashScreen" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+    </style>
+
+    <style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">#00000000</item> <!-- Or any transparency or color you need -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
 </resources>

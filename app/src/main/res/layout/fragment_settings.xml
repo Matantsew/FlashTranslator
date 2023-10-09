@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:orientation="vertical"
-        android:background="@color/light_gray"
+        android:background="@color/background_contrast"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
