@@ -1,4 +1,4 @@
-package com.example.latranslator
+package com.example.latranslator.services
 
 import android.annotation.SuppressLint
 import android.app.Service
@@ -15,6 +15,8 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
+import com.example.latranslator.INTENT_EXTRA_PROCESS_TEXT
+import com.example.latranslator.R
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
 import com.example.latranslator.data.repositories.ParametersRepository

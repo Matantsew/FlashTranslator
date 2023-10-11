@@ -1,8 +1,10 @@
-package com.example.latranslator
+package com.example.latranslator.activities
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.example.latranslator.INTENT_EXTRA_PROCESS_TEXT
+import com.example.latranslator.services.InstantTranslationService
 
 class ProcessTextTransparentInstantActivity : Activity() {
 

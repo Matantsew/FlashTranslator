@@ -9,7 +9,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.latranslator.DATA_STORE_MAIN
-import com.example.latranslator.TranslateAccessibilityService
+import com.example.latranslator.services.TranslateAccessibilityService
 
 fun Context.isAccessibilityTurnedOn(): Boolean {
 

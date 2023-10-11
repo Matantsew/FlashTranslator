@@ -1,9 +1,8 @@
-package com.example.latranslator
+package com.example.latranslator.activities
 
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageInfo
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -14,10 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.example.latranslator.GeneralViewModel
+import com.example.latranslator.R
 import com.example.latranslator.databinding.ActivityMainBinding
 import com.example.latranslator.fragments.LanguagesFragment
 import com.example.latranslator.fragments.SettingsFragment
 import com.example.latranslator.fragments.TranslatorFragment
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +41,11 @@ class MainActivity : AppCompatActivity() {
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        MobileAds.initialize(this) {}
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
 
         changeFragment<TranslatorFragment>(null)
 
@@ -82,8 +90,14 @@ class MainActivity : AppCompatActivity() {
                     }
                     LanguagesFragment::class.java -> {
                         when(F::class.java) {
-                            TranslatorFragment::class.java -> setCustomAnimations(R.anim.from_left, R.anim.to_right)
-                            SettingsFragment::class.java -> setCustomAnimations(R.anim.from_right, R.anim.to_left)
+                            TranslatorFragment::class.java -> setCustomAnimations(
+                                R.anim.from_left,
+                                R.anim.to_right
+                            )
+                            SettingsFragment::class.java -> setCustomAnimations(
+                                R.anim.from_right,
+                                R.anim.to_left
+                            )
                             else -> {
                             }
                         }
