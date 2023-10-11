@@ -1,5 +1,6 @@
 package com.example.latranslator.adapters
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +13,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.latranslator.data.Language
 import com.example.latranslator.GeneralViewModel
 import com.example.latranslator.R
+import com.example.latranslator.interstitialAdUnitId
 import com.example.latranslator.utils.visible
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LanguagesListAdapter(private val viewModel: GeneralViewModel)
+class LanguagesListAdapter(private val viewModel: GeneralViewModel, private val activity: Activity)
     : RecyclerView.Adapter<LanguagesListAdapter.ViewHolder>() {
 
     private var languages: List<Language>? = null
+
+    private var mInterstitialAd: InterstitialAd? = null
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+
+        loadInterstitialAd()
+    }
 
     fun setLanguages(newSet: List<Language>) {
         languages = newSet
@@ -45,6 +59,19 @@ class LanguagesListAdapter(private val viewModel: GeneralViewModel)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val language = languages?.get(position) ?: return
         holder.bind(language, position)
+    }
+
+    private fun loadInterstitialAd() {
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(activity, interstitialAdUnitId, adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                mInterstitialAd = interstitialAd
+            }
+        })
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -100,6 +127,8 @@ class LanguagesListAdapter(private val viewModel: GeneralViewModel)
                     progressCircularDownloadingLanguage.visible(true)
                     downloadDeleteButton.visible(false)
 
+                    if(mInterstitialAd == null)loadInterstitialAd()
+
                     onObservableDownloadLanguage(language)
                 }
                 else {
@@ -122,6 +151,8 @@ class LanguagesListAdapter(private val viewModel: GeneralViewModel)
 
                     viewModel.obtainDownloadedLanguages()
                     viewModel.refreshLanguage(language.key)
+
+                    mInterstitialAd?.show(activity)
 
                     Toast.makeText(itemView.context, "$language language is successfully downloaded", Toast.LENGTH_LONG).show()
                 }

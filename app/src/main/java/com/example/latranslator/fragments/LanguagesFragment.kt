@@ -29,7 +29,7 @@ class LanguagesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        languagesAdapter = LanguagesListAdapter(viewModel)
+        languagesAdapter = LanguagesListAdapter(viewModel, requireActivity())
 
         lifecycleScope.launchWhenCreated {
             viewModel.availableLanguages.observe(requireActivity()) {
