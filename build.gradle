@@ -1,11 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlin_version = '1.8.21'
+        kotlin_version = '1.8.22'
         hiltVersion = '2.42'
-        fragmentKtx = '1.4.1'
+        fragmentKtx = '1.7.0-alpha06'
         dataStoreVersion = "1.1.0-alpha02"
-        lifecycleVersion = "2.4.1"
+        lifecycleVersion = "2.7.0-alpha03"
         gradleVersion = '7.2.1'
     }
     repositories {
