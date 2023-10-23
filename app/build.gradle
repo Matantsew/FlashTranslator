@@ -7,6 +7,12 @@ plugins {
 
 android {
     signingConfigs {
+        debugConf {
+            keyAlias "latranslator"
+            keyPassword "cdasfvnta12`a31acl"
+            storePassword "cdasfvnta12`a31acl"
+            storeFile file("../../LaTranslator/keystore.jks")
+        }
         releaseConf {
             keyAlias "latranslator"
             keyPassword "cdasfvnta12`a31acl"
@@ -33,10 +39,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debugConf
+            debuggable false
+        }
         release {
             signingConfig signingConfigs.releaseConf
             minifyEnabled true
             shrinkResources true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
