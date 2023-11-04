@@ -41,7 +41,6 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debugConf
-            debuggable false
         }
         release {
             signingConfig signingConfigs.releaseConf
@@ -75,7 +74,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
 
     // Dagger Hilt
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
@@ -98,7 +97,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Google ads
-    implementation 'com.google.android.gms:play-services-ads:22.4.0'
+    implementation 'com.google.android.gms:play-services-ads:22.5.0'
 
     // in-app purchases
     implementation "com.android.billingclient:billing-ktx:6.0.1"

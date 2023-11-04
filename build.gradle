@@ -5,7 +5,7 @@ buildscript {
         hiltVersion = '2.42'
         fragmentKtx = '1.7.0-alpha06'
         dataStoreVersion = "1.1.0-alpha02"
-        lifecycleVersion = "2.7.0-alpha03"
+        lifecycleVersion = "2.7.0-beta01"
         gradleVersion = '7.2.1'
     }
     repositories {
