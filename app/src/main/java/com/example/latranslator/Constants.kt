@@ -1,7 +1,5 @@
 package com.example.latranslator
 
-const val interstitialAdUnitId = "ca-app-pub-3940256099942544/1033173712" // TODO: change before publication
-
 /* Data Store section start*/
 const val DATA_STORE_MAIN = "dataStoreMain"
 

@@ -10,10 +10,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.example.latranslator.BuildConfig
 import com.example.latranslator.data.Language
 import com.example.latranslator.GeneralViewModel
 import com.example.latranslator.R
-import com.example.latranslator.interstitialAdUnitId
 import com.example.latranslator.utils.visible
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
@@ -63,7 +63,10 @@ class LanguagesListAdapter(private val viewModel: GeneralViewModel, private val 
 
     private fun loadInterstitialAd() {
         val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(activity, interstitialAdUnitId, adRequest, object : InterstitialAdLoadCallback() {
+
+        val adId = if(BuildConfig.DEBUG) activity.getString(R.string.ad_interstitial_debug) else activity.getString(R.string.ad_interstitial_release)
+
+        InterstitialAd.load(activity, adId, adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 mInterstitialAd = null
             }

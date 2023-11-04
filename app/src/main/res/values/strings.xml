@@ -27,4 +27,11 @@
     <string name="ok" translatable="false">OK</string>
     <string name="continue_">Continue</string>
     <string name="version">Version:</string>
+
+    <!--Constants-->
+    <string name="ad_banner_debug" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_banner_release" translatable="false">ca-app-pub-5371604315427290/9462847112</string>
+
+    <string name="ad_interstitial_debug" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ad_interstitial_release" translatable="false">ca-app-pub-5371604315427290/3892955078</string>
 </resources>
