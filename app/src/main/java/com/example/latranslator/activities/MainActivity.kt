@@ -19,13 +19,9 @@ import com.example.latranslator.databinding.ActivityMainBinding
 import com.example.latranslator.fragments.LanguagesFragment
 import com.example.latranslator.fragments.SettingsFragment
 import com.example.latranslator.fragments.TranslatorFragment
-import com.example.latranslator.helpers.BillingHelper
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -36,29 +32,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var turnOnItem: MenuItem
     private lateinit var aboutItem: MenuItem
 
-    private val defaultScope = CoroutineScope(Dispatchers.IO)
-
-    private var billingHelper: BillingHelper? = null
-
     private val viewModel: GeneralViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         this.createConfigurationContext(this.resources.configuration)
-
-        billingHelper = BillingHelper.getInstance(application, defaultScope)
-
-        billingHelper?.setOnFetchPurchasesHistoryCallback(object : BillingHelper.OnFetchOffersCallback {
-            override fun onFetchOffers(offersIdSet: Set<String?>) {
-
-            }
-        })
-
-        // Additional verifying a purchases user made
-        defaultScope.launch {
-            billingHelper?.queryPurchasesAsync()
-        }
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
