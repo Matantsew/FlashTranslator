@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.example.latranslator.BuildConfig
 import com.example.latranslator.GeneralViewModel
 import com.example.latranslator.R
 import com.example.latranslator.databinding.ActivityMainBinding
@@ -20,6 +21,8 @@ import com.example.latranslator.fragments.LanguagesFragment
 import com.example.latranslator.fragments.SettingsFragment
 import com.example.latranslator.fragments.TranslatorFragment
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,8 +47,15 @@ class MainActivity : AppCompatActivity() {
 
         MobileAds.initialize(this) {}
 
+        val adBannerView = AdView(this)
+
+        adBannerView.setAdSize(AdSize.BANNER)
+        adBannerView.adUnitId = if(BuildConfig.DEBUG) getString(R.string.ad_banner_debug) else getString(R.string.ad_banner_release)
+
+        binding.adBannerFrame.addView(adBannerView)
+
         val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+        adBannerView.loadAd(adRequest)
 
         changeFragment<TranslatorFragment>(null)
 
