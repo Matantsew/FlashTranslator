@@ -18,7 +18,7 @@
     <string name="swap">Intercambiar</string>
     <string name="accessibility_check_dialog_title">Comprueba los permisos de accesibilidad</string>
     <string name="activate_hint">Activar el traductor \nen el servicio de accesibilidad</string>
-    <string name="accessibility_opening_dialog_description">Antes de comenzar a usar un traductor, asegúrese de haber permitido la accesibilidad para usarlo</string>
+    <string name="accessibility_opening_dialog_description">La Translator nõuab juurdepääsetavust, et koguda ja töödelda valitud teksti redigeeritavale väljale tõlkimiseks ja tõlke kuvamiseks ujuvraamil. \n \nAntes de comenzar a usar un traductor, asegúrese de haber permitido la accesibilidad para usarlo</string>
     <string name="first_version_released">Primera versión lanzada: 2023</string>
     <string name="to">Para</string>
     <string name="cancel">Cancelar</string>

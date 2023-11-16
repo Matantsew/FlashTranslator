@@ -18,7 +18,7 @@
     <string name="swap">Trocar</string>
     <string name="accessibility_check_dialog_title">Verifique as permissões de acessibilidade</string>
     <string name="activate_hint">Ative o tradutor no /nserviço de acessibilidade</string>
-    <string name="accessibility_opening_dialog_description">Antes de começar a usar um tradutor, certifique-se de permitir a acessibilidade para usá-lo</string>
+    <string name="accessibility_opening_dialog_description">La Translator requer acessibilidade para coletar e processar o texto selecionado em um campo editável para tradução e mostrar uma tradução em um quadro flutuante. \n \nAntes de começar a usar um tradutor, certifique-se de permitir a acessibilidade para usá-lo</string>
     <string name="first_version_released">Primeira versão lançada: 2023</string>
     <string name="to">Para</string>
     <string name="cancel">Cancelar</string>

@@ -18,7 +18,7 @@
     <string name="swap">Tausch</string>
     <string name="accessibility_check_dialog_title">Zugriffsberechtigungen prüfen</string>
     <string name="activate_hint">Aktivieren Sie den Übersetzer-\nin-Eingabehilfedienst</string>
-    <string name="accessibility_opening_dialog_description">Bevor Sie einen Übersetzer verwenden, stellen Sie bitte sicher, dass Sie eine Barrierefreiheit für die Verwendung zugelassen haben</string>
+    <string name="accessibility_opening_dialog_description">La Translator erfordert eine Barrierefreiheit, um ausgewählten Text im bearbeitbaren Feld für die Übersetzung zu sammeln und zu verarbeiten und eine Übersetzung in einem schwebenden Rahmen anzuzeigen. \n \nBevor Sie einen Übersetzer verwenden, stellen Sie bitte sicher, dass Sie eine Barrierefreiheit für die Verwendung zugelassen haben</string>
     <string name="first_version_released">Erste Version veröffentlicht: 2023</string>
     <string name="to">An</string>
     <string name="cancel">Abbrechen</string>

@@ -19,7 +19,7 @@
     <string name="swap">Переставить местами</string>
     <string name="accessibility_check_dialog_title">Проверьте настройки специальных возможностей</string>
     <string name="activate_hint">Включите переводчик \nв службе специальных возможностей</string>
-    <string name="accessibility_opening_dialog_description">Чтобы включить переводчик, дайте разрешение службе специальных возможностей его использовать.</string>
+    <string name="accessibility_opening_dialog_description">La Translator требует наличия специальных возможностей для сбора и обработки выделенного текста в редактируемом поле для перевода и отображения перевода в плавающей рамке. \n \nЧтобы включить переводчик, дайте разрешение службе специальных возможностей его использовать.</string>
     <string name="first_version_released">Первая версия выпущена в: 2023</string>
     <string name="to">На</string>
     <string name="cancel">Отмена</string>

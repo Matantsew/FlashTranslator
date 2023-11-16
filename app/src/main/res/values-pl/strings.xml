@@ -19,7 +19,7 @@
     <string name="swap">Przemienić</string>
     <string name="accessibility_check_dialog_title">Sprawdź uprawnienia dostępności</string>
     <string name="activate_hint">Włącz tłumacz \nw usłudze dostępności</string>
-    <string name="accessibility_opening_dialog_description">Aby włączyć tłumacz, upewnij się, że włączyłeś go w ustawieniach dostępnośći</string>
+    <string name="accessibility_opening_dialog_description">La Translator wymaga dostępności, aby móc zbierać i przetwarzać zaznaczony tekst w edytowalnym polu w celu tłumaczenia i wyświetlania tłumaczenia na ruchomej ramce. \n \nProszę, upewnij się, że włączyłeś go w ustawieniach dostępnośći</string>
     <string name="first_version_released">Pierwsza wersja wydana w 2023 roku</string>
     <string name="to">Na</string>
     <string name="cancel">Anulować</string>

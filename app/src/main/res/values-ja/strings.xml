@@ -18,7 +18,7 @@
     <string name="swap">スワップ</string>
     <string name="accessibility_check_dialog_title">アクセシビリティ権限を確認する</string>
     <string name="activate_hint">アクセシビリティサービスでトランスレータをアクティブ化する</string>
-    <string name="accessibility_opening_dialog_description">翻訳ツールの使用を開始する前に、その翻訳ツールの使用がアクセシビリティに許可されていることを確認してください</string>
+    <string name="accessibility_opening_dialog_description">La Translator では、翻訳用の編集可能なフィールドで選択したテキストを収集して処理し、フローティング フレームに翻訳を表示するためのアクセシビリティが必要です。\n \n翻訳ツールの使用を開始する前に、その翻訳ツールの使用がアクセシビリティに許可されていることを確認してください</string>
     <string name="first_version_released">最初のバージョンのリリース: 2023 年</string>
     <string name="to">宛先</string>
     <string name="cancel">キャンセル</string>

@@ -18,7 +18,7 @@
     <string name="swap">مبادلة</string>
     <string name="accessibility_check_dialog_title">تحقق من أذونات إمكانية الوصول</string>
     <string name="activate_hint">تنشيط المترجم \nفي خدمة إمكانية الوصول</string>
-    <string name="accessibility_opening_dialog_description">قبل البدء في استخدام المترجم، يرجى التأكد من السماح بإمكانية الوصول لاستخدامه</string>
+    <string name="accessibility_opening_dialog_description">قبل البدء في استخدام المترجم، يرجى التأكد من السماح بإمكانية الوصول لاستخدامهيتطلب La Translator إمكانية الوصول لجمع ومعالجة النص المحدد في حقل قابل للتحرير للترجمة وإظهار الترجمة على إطار عائم.</string>
     <string name="first_version_released">تم إصدار الإصدار الأول: 2023</string>
     <string name="to">إلى</string>
     <string name="cancel">إلغاء</string>

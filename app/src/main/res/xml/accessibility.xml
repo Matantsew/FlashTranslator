@@ -3,5 +3,6 @@
     android:accessibilityFlags="flagDefault"
     android:accessibilityFeedbackType="feedbackSpoken"
     android:notificationTimeout="100"
+    android:isAccessibilityTool="false"
     android:canRetrieveWindowContent="true"
     android:settingsActivity="com.example.latranslator.MainActivity" />

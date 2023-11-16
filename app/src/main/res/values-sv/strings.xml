@@ -18,7 +18,7 @@
     <string name="swap">Byt</string>
     <string name="accessibility_check_dialog_title">Kontrollera en tillgänglighetsbehörighet</string>
     <string name="activate_hint">Aktivera översättaren \ni tillgänglighetstjänsten</string>
-    <string name="accessibility_opening_dialog_description">Innan du börjar använda en översättare, se till att du har tillåtit en tillgänglighet för att använda den</string>
+    <string name="accessibility_opening_dialog_description">La Translator kräver en tillgänglighet för att samla in och bearbeta vald text i redigerbart fält för översättning och visning av en översättning på flytande ram. \n \nInnan du börjar använda en översättare, se till att du har tillåtit en tillgänglighet för att använda den</string>
     <string name="first_version_released">Första version släppt: 2023</string>
     <string name="to">Till</string>
     <string name="cancel">Avbryt</string>

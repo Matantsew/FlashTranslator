@@ -25,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.lang.IllegalStateException
 
 @AndroidEntryPoint
 class TranslateAccessibilityService : AccessibilityService() {
@@ -68,11 +69,11 @@ class TranslateAccessibilityService : AccessibilityService() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
 
-        if(overlayFrameLayout.isShown) {
-            windowManager.removeViewImmediate(overlayFrameLayout)
-        }
-
         runBlocking {
+
+            if(overlayFrameLayout.isShown) {
+                windowManager.removeViewImmediate(overlayFrameLayout)
+            }
 
             xOverlayOffset = ParametersRepository
                 .getTranslationFrameCurrentOffsetX(this@TranslateAccessibilityService) ?: 0
@@ -130,7 +131,14 @@ class TranslateAccessibilityService : AccessibilityService() {
             val params = createLayoutParameters(xOverlayOffset, yOverlayOffset)
             translator.translate(selectedText).addOnSuccessListener {
                 translationOverlayLayoutBinding.textTranslation.text = it
-                windowManager.addView(overlayFrameLayout, params)
+
+                try {
+                    windowManager.addView(overlayFrameLayout, params)
+                }
+                catch (e: IllegalStateException) {
+                    e.printStackTrace()
+                    windowManager.removeView(overlayFrameLayout)
+                }
             }
 
             overlayFrameLayout.setOnTouchListener(object : View.OnTouchListener {

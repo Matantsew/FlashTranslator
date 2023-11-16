@@ -18,7 +18,7 @@
     <string name="swap">Değiştir</string>
     <string name="accessibility_check_dialog_title">Erişilebilirlik izinlerini kontrol edin</string>
     <string name="activate_hint">Erişilebilirlik Hizmetlerinde Çevirmen`i Etkinleştirin</string>
-    <string name="accessibility_opening_dialog_description">Bir çevirmeni kullanmaya başlamadan önce, lütfen onu kullanmak için bir erişilebilirliğe izin verdiğinizden emin olun</string>
+    <string name="accessibility_opening_dialog_description">La Translator, seçilen metni çeviri için düzenlenebilir alanda toplamak ve işlemek ve bir çeviriyi kayan çerçevede göstermek için erişilebilirlik gerektirir. \n \nBir çevirmeni kullanmaya başlamadan önce, lütfen onu kullanmak için bir erişilebilirliğe izin verdiğinizden emin olun</string>
     <string name="first_version_released">Yayınlanan ilk sürüm: 2023</string>
     <string name="to">Dile çevir</string>
     <string name="cancel">İptal</string>

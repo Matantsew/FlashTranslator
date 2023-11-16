@@ -19,7 +19,7 @@
     <string name="swap">Swap</string>
     <string name="accessibility_check_dialog_title">Check an accessibility permissions</string>
     <string name="activate_hint">Activate the translator \nin accessibility service</string>
-    <string name="accessibility_opening_dialog_description">Before start using a translator, please make sure you allowed an accessibility to use it</string>
+    <string name="accessibility_opening_dialog_description">La Translator requires an accessibility to collect and process selected text in editable field for translation and showing a translation on floating frame. \n \nPlease make sure you allowed an accessibility to use it</string>
     <string name="first_version_released">First version released: 2023</string>
     <string name="email" translatable="false">e-mail: d.matantsew@gmail.com</string>
     <string name="to">To</string>

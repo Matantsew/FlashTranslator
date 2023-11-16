@@ -18,7 +18,7 @@
     <string name="swap">Ανταλλαγή</string>
     <string name="accessibility_check_dialog_title">Ελέγξτε τις άδειες προσβασιμότητας</string>
     <string name="activate_hint">Ενεργοποίηση του μεταφραστή \nin υπηρεσία προσβασιμότητας</string>
-    <string name="accessibility_opening_dialog_description">Πριν αρχίσετε να χρησιμοποιείτε έναν μεταφραστή, βεβαιωθείτε ότι έχετε επιτρέψει σε μια προσβασιμότητα να τον χρησιμοποιήσει</string>
+    <string name="accessibility_opening_dialog_description">Το La Translator απαιτεί προσβασιμότητα για τη συλλογή και επεξεργασία επιλεγμένου κειμένου σε επεξεργάσιμο πεδίο για μετάφραση και εμφάνιση μετάφρασης σε αιωρούμενο πλαίσιο. \n \nΠριν αρχίσετε να χρησιμοποιείτε έναν μεταφραστή, βεβαιωθείτε ότι έχετε επιτρέψει σε μια προσβασιμότητα να τον χρησιμοποιήσει</string>
     <string name="first_version_released">Πρώτη έκδοση που κυκλοφόρησε: 2023</string>
     <string name="to">Προς</string>
     <string name="cancel">Ακύρωση</string>

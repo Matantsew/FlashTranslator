@@ -18,7 +18,7 @@
     <string name="swap">Hoán đổi</string>
     <string name="accessibility_check_dialog_title">Kiểm tra khả năng tiếp cận</string>
     <string name="activate_hint">Kích hoạt trình dịch trong dịch vụ trợ năng</string>
-    <string name="accessibility_opening_dialog_description">Trước khi bắt đầu sử dụng trình dịch, vui lòng đảm bảo rằng bạn đã cho phép khả năng truy cập để sử dụng nó</string>
+    <string name="accessibility_opening_dialog_description">La Translator yêu cầu khả năng truy cập để thu thập và xử lý văn bản đã chọn trong trường có thể chỉnh sửa để dịch và hiển thị bản dịch trên khung nổi. \n \nTrước khi bắt đầu sử dụng trình dịch, vui lòng đảm bảo rằng bạn đã cho phép khả năng truy cập để sử dụng nó</string>
     <string name="first_version_released">Phiên bản đầu tiên được phát hành: 2023</string>
     <string name="to">Tới</string>
     <string name="cancel">Hủy</string>
