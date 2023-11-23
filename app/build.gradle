@@ -26,7 +26,7 @@ android {
 
     defaultConfig {
         applicationId "com.mata.latranslator"
-        minSdkVersion 31
+        minSdkVersion 24
         targetSdkVersion 34
         versionCode 7
         versionName "1.0.0"

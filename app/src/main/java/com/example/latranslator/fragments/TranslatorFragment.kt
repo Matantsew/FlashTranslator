@@ -1,6 +1,7 @@
 package com.example.latranslator.fragments
 
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -80,20 +81,20 @@ class TranslatorFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val spinnerSourceLanguageArrayAdapter: ArrayAdapter<Language> = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_spinner_item,
+            android.R.layout.simple_spinner_dropdown_item,
             languagesKeys
         )
 
-        spinnerSourceLanguageArrayAdapter.setDropDownViewResource(R.layout.spinner_language_dropdown_item)
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) spinnerSourceLanguageArrayAdapter.setDropDownViewResource(R.layout.spinner_language_dropdown_item)
         fromLanguageSpinner.adapter = spinnerSourceLanguageArrayAdapter
 
         val spinnerTargetLanguageArrayAdapter: ArrayAdapter<Language> = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_spinner_item,
+            android.R.layout.simple_spinner_dropdown_item,
             languagesKeys
         )
 
-        spinnerTargetLanguageArrayAdapter.setDropDownViewResource(R.layout.spinner_language_dropdown_item)
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) spinnerTargetLanguageArrayAdapter.setDropDownViewResource(R.layout.spinner_language_dropdown_item)
         toLanguageSpinner.adapter = spinnerTargetLanguageArrayAdapter
 
         viewModel.fromLanguageKey.value?.let { key ->

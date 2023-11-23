@@ -17,6 +17,7 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import com.example.latranslator.INTENT_EXTRA_PROCESS_TEXT
 import com.example.latranslator.R
+import com.example.latranslator.activities.MainActivity
 import com.example.latranslator.data.data_source.LanguagesHelper
 import com.example.latranslator.data.repositories.LanguagesRepository
 import com.example.latranslator.data.repositories.ParametersRepository
@@ -195,7 +196,7 @@ class InstantTranslationService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         if(!isAccessibilityTurnedOn()) {
-            exitProcess(0)
+            if(!MainActivity.isActivityOpen)exitProcess(0)
         }
     }
 }

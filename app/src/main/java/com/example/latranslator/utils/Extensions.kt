@@ -2,6 +2,7 @@ package com.example.latranslator.utils
 
 import android.content.Context
 import android.graphics.PixelFormat
+import android.os.Build
 import android.provider.Settings
 import android.view.View
 import android.view.WindowManager
@@ -31,10 +32,14 @@ val Context.dataStoreMain: DataStore<Preferences> by preferencesDataStore(
 
 fun createLayoutParameters(x: Int, y: Int): WindowManager.LayoutParams {
 
+    val type = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+    else WindowManager.LayoutParams.TYPE_PHONE
+
     val params = WindowManager.LayoutParams(
         0,
         0,
-        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        type,
         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
         PixelFormat.TRANSLUCENT)
 

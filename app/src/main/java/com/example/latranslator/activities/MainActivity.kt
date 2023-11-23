@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        isActivityOpen = true
+
         this.createConfigurationContext(this.resources.configuration)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
@@ -200,5 +202,9 @@ class MainActivity : AppCompatActivity() {
         aboutItem = menu.findItem(R.id.about_menu_item)
 
         return true
+    }
+
+    companion object {
+        var isActivityOpen = false
     }
 }
