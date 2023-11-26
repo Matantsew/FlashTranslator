@@ -8,7 +8,6 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.latranslator.GeneralViewModel
 import com.example.latranslator.R
@@ -17,8 +16,6 @@ import com.example.latranslator.helper.InterstitialAdHelper
 import com.example.latranslator.utils.visible
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class LanguagesListAdapter(private val viewModel: GeneralViewModel, private val activity: Activity)
     : RecyclerView.Adapter<LanguagesListAdapter.ViewHolder>() {
@@ -89,17 +86,15 @@ class LanguagesListAdapter(private val viewModel: GeneralViewModel, private val 
                 downloadDeleteButton.setImageResource(R.drawable.ic_baseline_download_24)
             }
 
-            viewModel.viewModelScope.launch(Dispatchers.Main) {
-                viewModel.processingLanguagesKeysSet.collect { set ->
-                    set.forEach { key ->
-                        if (key == language.key) {
-                            downloadDeleteButton.visible(false)
-                            progressCircularDownloadingLanguage.visible(true)
+            if(viewModel.processingLanguagesKeysSet.value.contains(language.key)) {
+                downloadDeleteButton.visible(false)
+                progressCircularDownloadingLanguage.visible(true)
 
-                            onObservableDownloadLanguage(language)
-                        }
-                    }
-                }
+                onObservableDownloadLanguage(language)
+            }
+            else {
+                downloadDeleteButton.visible(true)
+                progressCircularDownloadingLanguage.visible(false)
             }
 
             downloadDeleteButton.setOnClickListener {
